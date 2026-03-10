@@ -30,16 +30,16 @@ export default function TestimonialSection() {
   const wiggleRef = useRef<gsap.core.Tween[] | null>(null);
 
  useGSAP(() => {
-    // 1. THE HORIZONTAL MARQUEE
+    
     marqueeRef.current = gsap.to(".card-row", {
       xPercent: -50,
-      duration: 30, // Slowed down slightly for better readability
+      duration: 30, 
       ease: "none",
       repeat: -1,
     });
 
-    // 2. THE "WALKING" WIGGLE
-    // We store these as an array so we can pause/play all of them
+    //  THE MOVING WIGGLE
+   
     wiggleRef.current = gsap.to(".testimonial-card", {
       rotation: "+=8",
       yoyo: true,
@@ -50,13 +50,13 @@ export default function TestimonialSection() {
         each: 0.2,
         from: "random"
       }
-    }) as unknown as gsap.core.Tween[]; // GSAP return types can be tricky with staggers
+    }) as unknown as gsap.core.Tween[]; 
 
   }, { scope: containerRef });
 
   const handleMouseEnter = () => {
     marqueeRef.current?.pause();
-    // Use gsap.getTweensOf to target all cards if the ref array is tricky
+    
     gsap.getTweensOf(".testimonial-card").forEach(t => t.pause());
   };
 
@@ -87,7 +87,7 @@ export default function TestimonialSection() {
 
       {/* HORIZONTAL WALKING ROW */}
       <div className="relative w-full overflow-hidden z-10 mb-16">
-        {/* card-row is doubled to ensure seamless loop */}
+        
         <div className="card-row flex gap-6 md:gap-10 w-fit"
         onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
