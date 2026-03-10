@@ -48,7 +48,7 @@ export default function ProductSection() {
   const prevIndex = (index - 1 + PRODUCTS.length) % PRODUCTS.length;
   const nextIndex = (index + 1) % PRODUCTS.length;
 
-  // 1. PERSISTENT ANIMATIONS
+  //  PERSISTENT ANIMATIONS
   useGSAP(() => {
     gsap.to(".floating-product", {
       y: "-=12",
@@ -66,7 +66,7 @@ export default function ProductSection() {
     });
   }, { scope: containerRef });
 
-  // 2. MAIN ENTRANCE & PROGRESS BAR
+  // MAIN ENTRANCE & PROGRESS BAR
   useGSAP(() => {
     const tl = gsap.timeline({ 
         onStart: () => setIsAnimating(true),
@@ -142,25 +142,25 @@ export default function ProductSection() {
       <div className="relative z-20 flex flex-col items-center justify-center pt-20">
         <div className="product-kit relative w-48 h-72 md:w-60 md:h-96 flex items-center justify-center">
           
-          {/* Stars (Constant for all) */}
+          {/* Stars  */}
           <div className="side-star absolute top-[30%] left-[-18%] w-12 h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[18%] left-[10%] w-10 h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[40%] right-[-2%] w-10 h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[50%] right-[-10%] w-12 h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           
-          {/* CROWN: Only shows if the path exists */}
+          {/* CROWN */}
           {currentProduct.crown && (
             <div className="absolute top-[4%] left-[35%] -translate-x-1/2 z-30 w-10 h-10 md:w-15 md:h-15">
               <Image src={currentProduct.crown} alt="crown" fill className="object-contain" />
             </div>
           )}
 
-          {/* BLOB: Constant for all */}
+          {/* BLOBS */}
           <div className="absolute inset-0 -z-10 scale-[1.5] opacity-70">
             <Image src={currentProduct.blob} alt="shape" fill className="object-contain" />
           </div>
 
-          {/* FLOWER: Only shows if the path exists */}
+          {/* FLOWER*/}
           {currentProduct.flower && (
             <div className="absolute bottom-[3%] right-[6%] z-15 w-24 h-24 md:w-35 md:h-35">
               <Image src={currentProduct.flower} alt="flower" fill className="object-contain" />
