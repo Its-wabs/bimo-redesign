@@ -12,6 +12,8 @@ import BuddyCookie from "@/components/buddycookie";
 import TestimonialSection from "@/components/testimonials";
 import FindStore from "@/components/findstore";
 
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
@@ -121,30 +123,31 @@ export default function Page() {
          autoAlpha: 0,
          scale: 0.2,
          duration: 0.5,
-         ease: "power2.in" })
+         ease: "power2.in" 
+      })
 
       .set(".video-portal", { autoAlpha: 1, rotationY: 0 })
 
-       .to(".video-frame", { 
+      .to(".video-frame", { 
         clipPath: "circle(100% at 50% 50%)", 
         width: "100vw", 
         height: "100vh", 
-        duration: 0.8, 
+        duration: 0.6,  
         ease: "power2.out" 
       }, "-=0.2") 
 
-       .to(".main-cookie", { 
+      .to(".main-cookie", { 
         autoAlpha: 1, 
         rotation: 900, 
         scale: 0.20, 
         y: "-48vh", 
-        duration: 0.8, 
+        duration: 0.6,  
         ease: "power2.inOut" 
       }, "+=0.3")
 
-       .to(".main-cookie", { 
+      .to(".main-cookie", { 
         scale: 0.22, 
-        duration: 0.3, 
+        duration: 0.2, 
         yoyo: true, 
         repeat: 1, 
         ease: "back.out(2)" 
@@ -234,7 +237,7 @@ export default function Page() {
       }); 
 
       // SCENE 2 : Master sections scene from products to footer
-
+    
       const flowTl = gsap.timeline({
         scrollTrigger: {
           trigger: masterSceneRef.current,
@@ -346,7 +349,12 @@ flowTl.to({}, { duration: 1 });
 
     }, containerRef);
 
+    window.addEventListener("resize", () => {
+  ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+});
     return () => mm.revert();
+
+    
 
   }, {scope :containerRef, dependencies : [entranceDone]});
 

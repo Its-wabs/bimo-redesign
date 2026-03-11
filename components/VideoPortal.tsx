@@ -3,6 +3,7 @@ import Image from "next/image";
 import BimoButton from "./bimobutton";
 
 export default function VideoPortal() {
+  
   return (
     <div className="video-portal absolute inset-0 z-20 flex items-center justify-center opacity-0 pointer-events-none" style={{ perspective: "1000px" }}>
       <div 

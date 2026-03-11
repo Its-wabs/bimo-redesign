@@ -71,7 +71,7 @@ export default function BuddyCookie() {
           alt="Bimo Galette" 
           fill
           priority
-          className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
+          className="object-contain"
         />
       </div>
       </div>
