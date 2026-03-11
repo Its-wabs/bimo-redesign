@@ -186,7 +186,7 @@ export default function FullScreenMenu({ isOpen, onClose }: { isOpen: boolean; o
               <Link
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href, i)}
-                className="block text-white font-black text-6xl md:text-[8rem] leading-[0.85] uppercase tracking-tighter hover:text-[#E31E24] hover:scale-105 transition-all duration-300"
+                className="block text-white font-black text-5xl md:text-[8rem] leading-[0.85] uppercase tracking-tighter hover:text-[#E31E24] hover:scale-105 transition-all duration-300"
               >
                 {link.name}
               </Link>

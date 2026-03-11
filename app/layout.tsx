@@ -3,7 +3,7 @@ import 'remixicon/fonts/remixicon.css';
 import { Cairo, Kanit } from 'next/font/google';
 import "./globals.css";
 import localFont from "next/font/local";
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const peace = localFont({
   src: [
@@ -43,8 +43,10 @@ export default function RootLayout({
   return (
     
     <html lang="en" className={`${peace.variable} ${cairo.variable}`} >
+  
       <body
       >
+        <SpeedInsights />
         
        
         {children}
