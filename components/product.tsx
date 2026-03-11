@@ -175,10 +175,10 @@ export default function ProductSection() {
         <div className="product-kit relative w-[30vh] h-[45vh] max-w-[80vw] max-h-125 flex items-center justify-center">
           
           {/* Stars  */}
-          <div className="side-star absolute top-[33%] left-[-15%] w:9 h:9 md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[22%] left-[10%] w:7 h:7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[35%] right-[5%] w:7 h:7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[50%] right-[-10%] w:9 h:9  md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[33%] left-[-15%] w:9 h-9 md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[22%] left-[10%] w-7 h-7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[35%] right-[5%] w-7 h-7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[50%] right-[-10%] w-9 h-9  md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           
           {/* CROWN */}
           {currentProduct.crown && (
@@ -187,7 +187,7 @@ export default function ProductSection() {
             </div>
           )}
 
-         
+        
 
           {/* FLOWER*/}
           {currentProduct.flower && (
@@ -233,24 +233,24 @@ export default function ProductSection() {
       {/* LEFT HOVER ZONE */}
 <div 
   onPointerDown={handleManualPrev}
-  className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer not-active:opacity-0"
+  className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
   <div className="w-24 h-24 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-    </svg>
+    <div className="p-4 rounded-full">
+       <i className="ri-arrow-left-wide-line text-4xl text-white"></i>
+    </div>
   </div>
 </div>
 
 {/* RIGHT HOVER ZONE */}
 <div 
   onPointerDown={handleManualNext}
-  className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer not-active:opacity-0"
+  className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
-  <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 ">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-    </svg>
+  <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+    <div className="p-4 rounded-full">
+       <i className="ri-arrow-right-wide-line text-4xl text-white"></i>
+    </div>
   </div>
 </div>
 
