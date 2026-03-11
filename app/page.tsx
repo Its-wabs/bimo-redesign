@@ -49,8 +49,7 @@ export default function Page() {
     gsap.set(".main-cookie", { 
       xPercent: -50, 
       yPercent: -50, 
-      y: "120vh", 
-      z: 1,
+      y: "120vh",
       rotation: -180,
       autoAlpha: 1,
     });
@@ -356,12 +355,14 @@ flowTl.to({}, { duration: 1 });
 
     <main ref={containerRef} className="relative overflow-x-hidden ">
       <NavBar/>
-      <RollingCookie/>
+      
 
       
       <div ref={introRef} className="relative h-screen w-full overflow-hidden">
         <Hero />
+        <RollingCookie/>
         <VideoPortal />
+        
       </div>
 
      

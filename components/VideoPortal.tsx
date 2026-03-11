@@ -4,7 +4,7 @@ import BimoButton from "./bimobutton";
 
 export default function VideoPortal() {
   return (
-    <div className="video-portal absolute inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none" style={{ perspective: "1000px" }}>
+    <div className="video-portal absolute inset-0 z-20 flex items-center justify-center opacity-0 pointer-events-none" style={{ perspective: "1000px" }}>
       <div 
         className="video-frame relative w-[18vw] aspect-square overflow-hidden shadow-2xl"
         style={{ clipPath: "circle(50% at 50% 50%)" }}
