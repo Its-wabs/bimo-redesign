@@ -110,7 +110,13 @@ export default function ProductSection() {
 
     tl.fromTo(".product-kit", 
       { x: 100, opacity: 0, scale: 1, rotation: -15 },
-      { x: 0, opacity: 1, scale: 1.7, rotation: -8, duration: 0.8, ease: "power3.out" },
+      { x: 0, 
+        opacity: 1, 
+        scale: isDesktop ? 1.4 : 1.2,
+        rotation: -8, 
+        duration: 0.8, 
+        ease: "power3.out" 
+      },
       0.1
     );
 
@@ -166,13 +172,13 @@ export default function ProductSection() {
       
 
       <div className="relative z-20 flex flex-col gap-12 md:gap-22 items-center justify-center pt-20">
-        <div className="product-kit relative w-48 h-72 md:w-60 md:h-96 flex items-center justify-center">
+        <div className="product-kit relative w-[30vh] h-[45vh] max-w-[80vw] max-h-125 flex items-center justify-center">
           
           {/* Stars  */}
-          <div className="side-star absolute top-[30%] left-[-18%] w-12 h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[18%] left-[10%] w-10 h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[40%] right-[-2%] w-10 h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
-          <div className="side-star absolute top-[50%] right-[-10%] w-12 h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[33%] left-[-15%] w:9 h:9 md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[22%] left-[10%] w:7 h:7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[35%] right-[5%] w:7 h:7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[50%] right-[-10%] w:9 h:9  md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           
           {/* CROWN */}
           {currentProduct.crown && (
@@ -185,7 +191,7 @@ export default function ProductSection() {
 
           {/* FLOWER*/}
           {currentProduct.flower && (
-            <div className="absolute bottom-[12%] right-[12%] z-15 w-24 h-24 md:w-30 md:h-30">
+            <div className="absolute bottom-[12%] right-[5%] md:right-[18%] z-15 w-24 h-24 md:w-30 md:h-30">
               <Image src={currentProduct.flower} alt="flower" fill className="object-contain" />
             </div>
           )}
@@ -227,7 +233,7 @@ export default function ProductSection() {
       {/* LEFT HOVER ZONE */}
 <div 
   onPointerDown={handleManualPrev}
-  className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
+  className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer not-active:opacity-0"
 >
   <div className="w-24 h-24 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
@@ -239,7 +245,7 @@ export default function ProductSection() {
 {/* RIGHT HOVER ZONE */}
 <div 
   onPointerDown={handleManualNext}
-  className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
+  className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer not-active:opacity-0"
 >
   <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
