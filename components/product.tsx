@@ -6,33 +6,9 @@ import { useGSAP } from "@gsap/react";
 import BimoButton from "./bimobutton";
 
 const PRODUCTS = [
-  {
-    id: 1,
-    name: "CLASSIC BIMO GALETTE",
-    img: "/img/classic.png",
-    bgColor: "#E97A3E",
-    blob: "/img/blob.svg",
-    crown: "/img/crown.svg", 
-    flower: "/img/flower.svg",
-  },
-  {
-    id: 2,
-    name: "DELICIOUS BIMO COOKIES",
-    img: "/img/cookiez.png",
-    bgColor: "#7C4DFF",
-    blob: "/img/cook.svg",
-    crown: "", 
-    flower: "", 
-  },
-  {
-    id: 3,
-    name: "IRRESISTIBLE BIMO TANGO",
-    img: "/img/tangooo.png",
-    bgColor: "#4CAF50",
-    blob: "/img/Stango.svg",
-    crown: "", 
-    flower: "", 
-  }
+  { id: 1, name: "CLASSIC BIMO GALETTE", img: "/img/classic.png", bgColor: "#E97A3E" },
+  { id: 2, name: "DELICIOUS BIMO COOKIES", img: "/img/cookiez.png", bgColor: "#7C4DFF" },
+  { id: 3, name: "IRRESISTIBLE BIMO TANGO", img: "/img/tangooo.png", bgColor: "#4CAF50" }
 ];
 
 export default function ProductSection() {
@@ -171,30 +147,19 @@ export default function ProductSection() {
       }
       
 
-      <div className="relative z-20 flex flex-col gap-12 md:gap-22 items-center justify-center pt-20">
+      <div className="relative z-20 flex flex-col gap-12 md:gap-22 items-center justify-center pt-20 h-full max-h-[85vh] w-full">
         <div className="product-kit relative w-[30vh] h-[45vh] max-w-[80vw] max-h-125 flex items-center justify-center">
           
           {/* Stars  */}
-          <div className="side-star absolute top-[33%] left-[-15%] w:9 h-9 md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
+          <div className="side-star absolute top-[33%] left-[-15%] w-9 h-9 md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[22%] left-[10%] w-7 h-7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[35%] right-[5%] w-7 h-7 md:w-10 md:h-10 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           <div className="side-star absolute top-[50%] right-[-10%] w-9 h-9  md:w-12 md:h-12 z-10"><Image src="/img/stars.svg" alt="star" fill className="object-contain" /></div>
           
-          {/* CROWN */}
-          {currentProduct.crown && (
-            <div className="absolute top-[6%] left-[35%] -translate-x-1/2 z-30 w-10 h-10 md:w-15 md:h-15">
-              <Image src={currentProduct.crown} alt="crown" fill className="object-contain" />
-            </div>
-          )}
-
+         
         
 
-          {/* FLOWER*/}
-          {currentProduct.flower && (
-            <div className="absolute bottom-[12%] right-[5%] md:right-[18%] z-15 w-24 h-24 md:w-30 md:h-30">
-              <Image src={currentProduct.flower} alt="flower" fill className="object-contain" />
-            </div>
-          )}
+       
 
           <div className="floating-product relative w-full h-full z-20 ">
             <Image src={currentProduct.img} alt={currentProduct.name} fill priority className="object-contain" />
@@ -247,7 +212,7 @@ export default function ProductSection() {
   onPointerDown={handleManualNext}
   className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
-  <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+  <div className="w-24 h-24 rounded-full  flex items-center justify-center  md:opacity-0 md:group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
     <div className="p-4 rounded-full">
        <i className="ri-arrow-right-wide-line text-4xl text-white"></i>
     </div>
