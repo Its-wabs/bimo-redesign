@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -48,6 +48,16 @@ export default function ProductSection() {
   const prevIndex = (index - 1 + PRODUCTS.length) % PRODUCTS.length;
   const nextIndex = (index + 1) % PRODUCTS.length;
 
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDesktop();
+    window.addEventListener("resize", checkDesktop);
+    
+    return () => window.removeEventListener("resize", checkDesktop);
+  });
+
   //  PERSISTENT ANIMATIONS
   useGSAP(() => {
     gsap.to(".floating-product", {
@@ -81,12 +91,20 @@ export default function ProductSection() {
     tl.fromTo(".progress-fill", { width: "0%" }, { width: "100%", duration: 4, ease: "none" }, 0);
 
     tl.fromTo(bgPopRef.current, 
-      { scale: 0, autoAlpha: 1, backgroundColor: currentProduct.bgColor },
       { 
-        scale: 1.5, duration: 2, ease: "expo.out",
+        clipPath: "circle(0% at 50% 50%)", 
+        backgroundColor: currentProduct.bgColor,
+        autoAlpha: 1
+      },
+      { 
+        clipPath: "circle(150% at 50% 50%)", 
+        duration: 1, 
+        ease: "power3.inOut",
         onComplete: () => {
+         
           gsap.set(containerRef.current, { backgroundColor: currentProduct.bgColor });
-          gsap.set(bgPopRef.current, { scale: 0, autoAlpha: 0 });
+         
+          gsap.set(bgPopRef.current, { autoAlpha: 0, clipPath: "circle(0% at 50% 50%)" });
         }
       }, 0);
 
@@ -124,22 +142,30 @@ export default function ProductSection() {
 
   return (
     <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-      <div ref={bgPopRef} className="absolute z-0 w-[150vmax] h-[150vmax] rounded-full pointer-events-none invisible" />
+      <div ref={bgPopRef} className="absolute inset-0 z-0 pointer-events-none" style={{ clipPath: "circle(0% at 50% 50%)" }} />
 
       <div className="absolute inset-0 z-5 pointer-events-none opacity-10" 
         style={{ backgroundImage: `url("/img/bg-pattern.jpg")`, backgroundSize: 'cover' }} 
       />
 
       {/* Side Previews */}
-      <div className="side-left absolute left-[-7%] top-1/2 -translate-y-1/2 z-10 w-70 h-100 scale-125  opacity-30 pointer-events-none hidden lg:block -rotate-6">
+      {isDesktop && (
+        <>
+        <div className="side-left absolute left-[-7%] top-1/2 -translate-y-1/2 z-10 w-70 h-100   opacity-30 pointer-events-none hidden lg:block -rotate-6">
          <Image src={PRODUCTS[prevIndex].img} alt="prev" fill className="object-contain grayscale-40 blur-[1px]" />
       </div>
 
-      <div className="side-right absolute right-[-7%] top-1/2 -translate-y-1/2 z-10 w-70 h-100 scale-125 opacity-30 pointer-events-none hidden lg:block -rotate-6">
+      <div className="side-right absolute right-[-7%] top-1/2 -translate-y-1/2 z-10 w-70 h-100 opacity-30 pointer-events-none hidden lg:block -rotate-6">
          <Image src={PRODUCTS[nextIndex].img} alt="next" fill className="object-contain grayscale-40 blur-[1px]" />
       </div>
 
-      <div className="relative z-20 flex flex-col items-center justify-center pt-20">
+        </>
+      )
+
+      }
+      
+
+      <div className="relative z-20 flex flex-col gap-12 md:gap-22 items-center justify-center pt-20">
         <div className="product-kit relative w-48 h-72 md:w-60 md:h-96 flex items-center justify-center">
           
           {/* Stars  */}
@@ -150,29 +176,26 @@ export default function ProductSection() {
           
           {/* CROWN */}
           {currentProduct.crown && (
-            <div className="absolute top-[4%] left-[35%] -translate-x-1/2 z-30 w-10 h-10 md:w-15 md:h-15">
+            <div className="absolute top-[6%] left-[35%] -translate-x-1/2 z-30 w-10 h-10 md:w-15 md:h-15">
               <Image src={currentProduct.crown} alt="crown" fill className="object-contain" />
             </div>
           )}
 
-          {/* BLOBS */}
-          <div className="absolute inset-0 -z-10 scale-[1.5] opacity-70">
-            <Image src={currentProduct.blob} alt="shape" fill className="object-contain" />
-          </div>
+         
 
           {/* FLOWER*/}
           {currentProduct.flower && (
-            <div className="absolute bottom-[3%] right-[6%] z-15 w-24 h-24 md:w-35 md:h-35">
+            <div className="absolute bottom-[12%] right-[12%] z-15 w-24 h-24 md:w-30 md:h-30">
               <Image src={currentProduct.flower} alt="flower" fill className="object-contain" />
             </div>
           )}
 
-          <div className="floating-product relative w-full h-full z-20 scale-[1.3]">
-            <Image src={currentProduct.img} alt={currentProduct.name} fill priority className="object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.3)]" />
+          <div className="floating-product relative w-full h-full z-20 ">
+            <Image src={currentProduct.img} alt={currentProduct.name} fill priority className="object-contain" />
           </div>
         </div>
 
-        <div className="product-text text-center mt-24 md:mt-32 flex flex-col items-center">
+        <div className="product-text text-center flex flex-col items-center">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase tracking-tighter mb-6">
             {currentProduct.name}
           </h2>
@@ -206,7 +229,7 @@ export default function ProductSection() {
   onPointerDown={handleManualPrev}
   className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
-  <div className="w-24 h-24 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 backdrop-blur-md">
+  <div className="w-24 h-24 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
@@ -218,7 +241,7 @@ export default function ProductSection() {
   onPointerDown={handleManualNext}
   className="group absolute right-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
-  <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 backdrop-blur-md">
+  <div className="w-24 h-24 rounded-full  flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500 ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="white" className="w-10 h-10">
       <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
     </svg>
