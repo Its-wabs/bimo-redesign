@@ -22,7 +22,7 @@ export const useLiquidNavigation = () => {
 
     // left wave
     const leftWave = document.createElement("div");
-    leftWave.style.cssText = "height: 130%; width: 15vw; right: 2; margin-left: -14.8vw; position: relative; flex-shrink: 0;";
+    leftWave.style.cssText = "height: 130%; width: 15vw;  margin-left: -14.8vw; position: relative; flex-shrink: 0; z-index: 2; margin-right: -2px;";
     leftWave.innerHTML = `
       <svg class="w-full h-full" viewBox="0 0 320 1440" preserveAspectRatio="none">
         <path fill="#3D1E12" d="M320,0 L160,0 C0,120 320,240 160,360 C0,480 320,600 160,720 C0,840 320,960 160,1080 C0,1200 320,1320 160,1440 L320,1440 Z" />
@@ -31,12 +31,12 @@ export const useLiquidNavigation = () => {
 
     // the choco block
     const block = document.createElement("div");
-    block.style.cssText = "flex: 1; background: #3D1E12;";
+    block.style.cssText = "flex: 1; background: #3D1E12; position: relative; z-index: 1;";
 
     // right wave
    
     const rightWave = document.createElement("div");
-    rightWave.style.cssText = "height: 130%; width: 15vw; left: 2; margin-right: -14.8vw; position: relative; flex-shrink: 0; transform: scaleX(-1);";
+    rightWave.style.cssText = "height: 130%; width: 15vw; margin-right: -14.8vw; position: relative; flex-shrink: 0; transform: scaleX(-1); z-index: 2; margin-left: -2px;";
     rightWave.innerHTML = `
       <svg class="w-full h-full" viewBox="0 0 320 1440" preserveAspectRatio="none">
         <path fill="#3D1E12" d="M320,0 L160,0 C0,120 320,240 160,360 C0,480 320,600 160,720 C0,840 320,960 160,1080 C0,1200 320,1320 160,1440 L320,1440 Z" />

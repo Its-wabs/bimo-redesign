@@ -53,7 +53,7 @@ const FindStore = () => {
             <footer className="w-full h-[80vh] bg-[#151414] text-white pt-32 pb-8 px-6 flex flex-col items-center justify-center z-10">
                 
                     {/* empty space for buddy cookie */}
-                    <div className="h-10 w-full" /> 
+                   <div className="h-[10vh] md:h-20 w-full" />
 
                     <p className="text-md md:text-3xl font-english tracking-[0.2em] text-center uppercase mb-6 md:max-w-5xl">
                         Sign up to receive offers, updates & more
@@ -80,6 +80,7 @@ const FindStore = () => {
                            
                         
                          <a href="/products" onClick={(e) => handleNavigation(e, "/products")} className="font-bold uppercase text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">Products</a>
+                        
                         <div className="flex gap-6 text-3xl md:text-4xl text-gray-200 order-first md:order-0">
                 <i className="ri-facebook-circle-fill hover:text-[#E31E24] cursor-pointer transition-transform hover:-translate-y-1"></i>
                 <i className="ri-tiktok-fill hover:text-[#E31E24] cursor-pointer transition-transform hover:-translate-y-1"></i>
@@ -90,10 +91,10 @@ const FindStore = () => {
                         <a href="#" className="font-bold uppercase text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">About</a>
                     </div>
 
-                    <div className="absolute bottom-2 flex justify-between items-center gap-8">
-                        <a href="#" className="font-english uppercase text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">privacy & policy</a>
-                        <p className="text-sm font-medium text-[#E31E24]/80 flex gap-2">© Groupe Bimo <span className="text-gray-200">2026</span></p>
-                        <a href="#" className="font-english uppercase text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">terms of service</a>
+                    <div className="w-full max-w-[85vw] flex flex-col md:flex-row justify-between items-center gap-6 mt-16 pt-8">
+                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">privacy & policy</a>
+                        <p className="text-xs md:text-sm font-medium text-[#E31E24]/80 flex gap-2">© Groupe Bimo <span className="text-gray-200">2026</span></p>
+                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">terms of service</a>
                     </div>
                 
             </footer>
