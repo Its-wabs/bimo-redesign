@@ -23,7 +23,7 @@ export default function RollingCookie() {
       style={{ perspective: "1000px" }}
     >
       
-      <div onClick={handleBackToTop} className="cookie-inner relative  w-200 sm:w-200 md:w-275 max-w-275 lg:max-w-300 aspect-square cursor-pointer active:scale-95 transition-transform">
+      <div onClick={handleBackToTop} className="cookie-inner relative  w-120 sm:w-150 md:w-275 max-w-275 lg:max-w-300 aspect-square cursor-pointer active:scale-95 transition-transform">
         <Image 
           src="/img/bimo.png" 
           alt="Bimo Galette" 
