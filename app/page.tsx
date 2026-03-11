@@ -349,9 +349,7 @@ flowTl.to({}, { duration: 1 });
 
     }, containerRef);
 
-    window.addEventListener("resize", () => {
-  ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-});
+   
     return () => mm.revert();
 
     

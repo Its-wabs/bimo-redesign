@@ -22,8 +22,6 @@ export default function RollingCookie() {
       className="main-cookie opacity-0 invisible fixed top-1/2 left-1/2 z-25 pointer-events-none flex items-center justify-center" 
       style={{ 
         perspective: "1000px",
-        willChange: "transform",
-        transform: "translateZ(0)" 
        }}
     >
       
