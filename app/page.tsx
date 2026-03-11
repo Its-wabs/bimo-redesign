@@ -50,6 +50,7 @@ export default function Page() {
       xPercent: -50, 
       yPercent: -50, 
       y: "120vh", 
+      z: 1,
       rotation: -180,
       autoAlpha: 1,
     });
