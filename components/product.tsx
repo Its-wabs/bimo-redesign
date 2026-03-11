@@ -200,7 +200,7 @@ export default function ProductSection() {
   onPointerDown={handleManualPrev}
   className="group absolute left-0 top-0 z-50 h-full w-[20vw] flex items-center justify-center cursor-pointer"
 >
-  <div className="w-24 h-24 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
+  <div className="w-24 h-24 rounded-full flex items-center justify-center md:opacity-0 md:group-hover:opacity-100 group-hover:scale-110 transition-all duration-500">
     <div className="p-4 rounded-full">
        <i className="ri-arrow-left-wide-line text-4xl text-white"></i>
     </div>
