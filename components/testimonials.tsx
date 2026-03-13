@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -16,8 +16,12 @@ const cards = [
 
 const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) => (
   <div 
-    className="testimonial-card  w-48 h-48 md:w-100 md:h-100 m-10 rounded-3xl shadow-xl transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-6"
-    style={{ backgroundColor: color, transform: `rotate(${rotate}deg)` }}
+    className="testimonial-card shrink-0 m-8 rounded-3xl shadow-xl transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-6"
+    style={{ backgroundColor: color,
+       transform: `rotate(${rotate}deg)`,
+       width: 'clamp(15rem, 100vw, 22rem)',  
+      height: 'clamp(15rem, 100vw, 22rem)',
+       }}
   >
     {/* Placeholder for text content if needed later */}
     <div className="w-full h-full border-2 border-white/20 rounded-2xl border-dashed" />
@@ -27,20 +31,32 @@ const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) =
 export default function TestimonialSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<gsap.core.Tween | null>(null);
-  const wiggleRef = useRef<gsap.core.Tween[] | null>(null);
+  const wiggleRef = useRef<gsap.core.Tween | null>(null);
+  const [isMobile,setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
  useGSAP(() => {
     
     marqueeRef.current = gsap.to(".card-row", {
       xPercent: -50,
-      duration: 30, 
+      duration: isMobile ? 20 : 30,
       ease: "none",
       repeat: -1,
     });
 
-    //  THE MOVING WIGGLE
-   
-    wiggleRef.current = gsap.to(".testimonial-card", {
+    //  THE MOVING WIGGLE ( desktop only for performance)
+    if(!isMobile) {
+       wiggleRef.current = gsap.to(".testimonial-card", {
       rotation: "+=8",
       yoyo: true,
       repeat: -1,
@@ -50,23 +66,35 @@ export default function TestimonialSection() {
         each: 0.2,
         from: "random"
       }
-    }) as unknown as gsap.core.Tween[]; 
+    });
 
-  }, { scope: containerRef });
+    }
+
+    return () => {
+      marqueeRef.current?.kill();
+      wiggleRef.current?.kill();
+    }
+   
+
+  }, { scope: containerRef, dependencies: [isMobile] });
 
   const handleMouseEnter = () => {
+    if(isMobile) return;
     marqueeRef.current?.pause();
+    wiggleRef.current?.pause();
     
     gsap.getTweensOf(".testimonial-card").forEach(t => t.pause());
   };
 
   const handleMouseLeave = () => {
+    if(isMobile) return;
     marqueeRef.current?.play();
+    wiggleRef.current?.play();
     gsap.getTweensOf(".testimonial-card").forEach(t => t.play());
   };
 
   return (
-    <section ref={containerRef} className="relative w-full h-full flex flex-col items-center justify-center bg-[#5C3526] overflow-hidden">
+    <section ref={containerRef} className="relative w-full min-h-full flex flex-col text-center items-center justify-center bg-[#5C3526] overflow-hidden">
        {/* Background Pattern */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none opacity-10" 
@@ -99,7 +127,7 @@ export default function TestimonialSection() {
       </div>
 
       {/* Footer Content */}
-      <div className="testimonial-footer flex flex-col items-center gap-6 z-10">
+      <div className="testimonial-footer flex flex-col items-center justify-center gap-6 z-10">
         <h3 className="text-2xl md:text-3xl font-bold text-white text-center italic">
           What’s your story? Share it with us
         </h3>

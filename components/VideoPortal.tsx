@@ -10,7 +10,7 @@ export default function VideoPortal() {
         className="video-frame relative w-[18vw] aspect-square overflow-hidden shadow-2xl"
         style={{ clipPath: "circle(50% at 50% 50%)" }}
       >
-        <video autoPlay muted loop playsInline className="video-bg w-full h-full object-cover">
+        <video preload="metadata" autoPlay muted loop playsInline className="video-bg w-full h-full object-cover">
           <source src="/video/nostalgia.mp4" type="video/mp4" />
         </video>
         

@@ -3,12 +3,13 @@ import Image from "next/image";
 
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { forwardRef } from "react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollToPlugin);
 } 
 
-export default function RollingCookie() {
+const RollingCookie = forwardRef<HTMLDivElement>((props, ref) => {
   const handleBackToTop = () => {
     
     gsap.to(window, {
@@ -19,6 +20,7 @@ export default function RollingCookie() {
   };
   return (
     <div 
+    ref ={ref}
       className="main-cookie opacity-0 invisible fixed top-1/2 left-1/2 z-25 pointer-events-none flex items-center justify-center" 
       style={{ 
         perspective: "1000px",
@@ -36,4 +38,8 @@ export default function RollingCookie() {
       </div>
     </div>
   );
-}
+});
+
+RollingCookie.displayName = "RollingCookie";
+
+export default RollingCookie;

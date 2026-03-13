@@ -50,12 +50,12 @@ const FindStore = () => {
             </div>
 
             
-            <footer className="w-full h-[80vh] bg-[#151414] text-white pt-32 pb-8 px-6 flex flex-col items-center justify-center z-10">
+            <footer className="w-full h-[80vh] bg-[#151414] text-white pt-32 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10">
                 
                     {/* empty space for buddy cookie */}
                    <div className="h-[10vh] md:h-20 w-full" />
 
-                    <p className="text-md md:text-3xl font-english tracking-[0.2em] text-center uppercase mb-6 md:max-w-5xl">
+                    <p className="text-md mt-5 md:mt-0 md:text-3xl font-english tracking-[0.2em] text-center uppercase mb-6 md:max-w-5xl">
                         Sign up to receive offers, updates & more
                     </p>
                     
@@ -70,7 +70,7 @@ const FindStore = () => {
                         </button>
                     </div>
 
-                    <div className="mb-2 md:mb-10">
+                    <div className="mb-1 md:mb-10">
                         <Image src="/img/logo.png" alt="Logo" width={600} height={400} className="w-full h-auto md:w-150" priority  />
                     </div>
 
@@ -91,10 +91,10 @@ const FindStore = () => {
                         <a href="#" className="font-bold uppercase text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">About</a>
                     </div>
 
-                    <div className="w-full max-w-[85vw] flex flex-col md:flex-row justify-between items-center gap-6 mt-16 pt-8">
-                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">privacy & policy</a>
+                    <div className="w-full md:max-w-[85vw] flex  justify-between items-center mb-2 md:mb-0.5 gap-6 mt-7 md:mt-16 md:pt-8">
+                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">privacy <span className="hidden md:inline">& policy</span></a>
                         <p className="text-xs md:text-sm font-medium text-[#E31E24]/80 flex gap-2">© Groupe Bimo <span className="text-gray-200">2026</span></p>
-                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">terms of service</a>
+                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">terms <span className="hidden md:inline">of service</span></a>
                     </div>
                 
             </footer>

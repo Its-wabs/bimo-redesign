@@ -9,7 +9,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollToPlugin);
 }
 
-export default function BuddyCookie() {
+const BuddyCookie = forwardRef<HTMLDivElement>((props, ref) => {
 
   const cookieRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
@@ -55,6 +55,7 @@ export default function BuddyCookie() {
 
   return (
     <div 
+      ref={ref}
       className="buddy-cookie opacity-0 invisible fixed top-1/2 left-1/2 z-40 pointer-events-none flex items-center justify-center" 
       style={{ perspective: "1000px" }}
     >
@@ -77,4 +78,8 @@ export default function BuddyCookie() {
       </div>
     </div>
   );
-}
+});
+
+BuddyCookie.displayName = "BuddyCookie";
+
+export default BuddyCookie;

@@ -18,10 +18,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Page() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const cookieRef = useRef<HTMLDivElement>(null);
+  const buddyRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
   const masterSceneRef = useRef<HTMLDivElement>(null);
   const storeRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const testimonialsRef = useRef<HTMLDivElement>(null);
   
@@ -48,7 +51,7 @@ export default function Page() {
 
   useGSAP(() => {
 
-    gsap.set(".main-cookie", { 
+    gsap.set(cookieRef.current, { 
       xPercent: -50, 
       yPercent: -50, 
       y: "120vh",
@@ -56,7 +59,7 @@ export default function Page() {
       autoAlpha: 1,
     });
 
-    gsap.to(".main-cookie", {
+    gsap.to(cookieRef.current, {
       y: "43vh",
       rotation: 0,
       duration: 1.8,
@@ -102,13 +105,13 @@ export default function Page() {
          duration: 1
              }, 0.2)
 
-      .to("nav", { 
+      .to(navRef.current, { 
         y: -100,
         autoAlpha: 0,
         duration: 0.6,
         ease: "power2.in" }, 0)
 
-      .to(".main-cookie", { 
+      .to(cookieRef.current, { 
                 y: 0, 
                 scale: isMobile ? 0.45 : 0.35,
                 rotation: 720, 
@@ -119,7 +122,7 @@ export default function Page() {
             }, 0);
 
     if(isMobile) {
-      scene1.to(".main-cookie", {
+      scene1.to(cookieRef.current, {
          autoAlpha: 0,
          scale: 0.2,
          duration: 0.5,
@@ -136,7 +139,7 @@ export default function Page() {
         ease: "power2.out" 
       }, "-=0.2") 
 
-      .to(".main-cookie", { 
+      .to(cookieRef.current, { 
         autoAlpha: 1, 
         rotation: 900, 
         scale: 0.20, 
@@ -145,7 +148,7 @@ export default function Page() {
         ease: "power2.inOut" 
       }, "+=0.3")
 
-      .to(".main-cookie", { 
+      .to(cookieRef.current, { 
         scale: 0.22, 
         duration: 0.2, 
         yoyo: true, 
@@ -155,7 +158,7 @@ export default function Page() {
 
     }
     else {
-        scene1.to(".main-cookie", { 
+        scene1.to(cookieRef.current, { 
           rotationY: 90, 
           autoAlpha: 0, 
           duration: 0.4 
@@ -178,7 +181,7 @@ export default function Page() {
              ease: "power3.inOut"
 
              })
-             .to(".main-cookie", { 
+             .to(cookieRef.current, { 
               autoAlpha: 1, 
               rotationY: 0, 
               rotation: 900, 
@@ -190,7 +193,7 @@ export default function Page() {
     cursor: "pointer"
              }, "<")
              
-             .to(".main-cookie", { 
+             .to(cookieRef.current, { 
               scale: 0.22, 
               duration: 0.35, 
               yoyo: true, 
@@ -227,7 +230,7 @@ export default function Page() {
       
       .fromTo(".video-cta", { autoAlpha: 0, y: 0 }, { autoAlpha: 1, y: 0, duration: 0.6 }, "-=0.4")
       
-      .to(".main-cookie", { 
+      .to(cookieRef.current, { 
         y: "-65vh", 
         autoAlpha: 0, 
         duration: 0.8, 
@@ -250,7 +253,7 @@ export default function Page() {
       });
 
       // Setup initial states for the flow
-      flowTl.set(".buddy-cookie", { 
+      flowTl.set(buddyRef.current, { 
         xPercent: -50, 
         yPercent: -50, 
         y: "120vh",
@@ -263,8 +266,8 @@ export default function Page() {
       flowTl.set(storeRef.current, { yPercent: 100 });
 
       // Bring in Navbar and Buddy in Product Section
-      flowTl.to("nav", { y: 0, autoAlpha: 1, duration: 0.5 })
-            .to(".buddy-cookie", { 
+      flowTl.to(navRef.current, { y: 0, autoAlpha: 1, duration: 0.5 })
+            .to(buddyRef.current, { 
               y: "45vh", 
         x: "-47vw",
         rotation: 30,
@@ -277,7 +280,7 @@ export default function Page() {
       flowTl.to({}, { duration: 1 }); 
 
       //  Buddy Leaves Product 
-      flowTl.to(".buddy-cookie", { 
+      flowTl.to(buddyRef.current, { 
         y: "120vh", x: "-20vw", rotation: 90, autoAlpha: 0, 
         duration: 1, ease: "power2.in" 
       });
@@ -290,14 +293,14 @@ export default function Page() {
       }, "-=0.5");
 
       // Buddy Re-appears 
-      flowTl.set(".buddy-cookie", { 
+      flowTl.set(buddyRef.current, { 
         x: "120vw",
          y: "120vh",
           rotation: 180,
            autoAlpha: 0,
             scale: 0.25 
       })
-      .to(".buddy-cookie", { 
+      .to(buddyRef.current, { 
         autoAlpha: 1,
          y: "43vh",
           x: "46vw",
@@ -308,7 +311,7 @@ export default function Page() {
 
       flowTl.to({}, { duration: 1.5 });
 
-      flowTl.to(".buddy-cookie", { 
+      flowTl.to(buddyRef.current, { 
         y: "120vh", x: "-20vw", rotation: 90, autoAlpha: 0, 
         duration: 1, ease: "power2.in" 
       });
@@ -317,8 +320,8 @@ export default function Page() {
 
       flowTl.to(storeRef.current, { yPercent: 0, duration: 2, ease: "power3.inOut" }, "-=0.5");
 
-      flowTl.set(".buddy-cookie", { x: "0vw", y: "120vh", rotation: 0, autoAlpha: 0 })
-            .to(".buddy-cookie", { 
+      flowTl.set(buddyRef.current, { x: "0vw", y: "120vh", rotation: 0, autoAlpha: 0 })
+            .to(buddyRef.current, { 
                autoAlpha: 1, y: "48vh", x: "0vw", rotation: 0, duration: 1.5, ease: "back.out(1.2)" 
             });
 
@@ -330,9 +333,9 @@ flowTl.to(".find-store-container", {
     duration: 3,
     ease: "power2.inOut"
 })
-.to("nav", { y: -100, autoAlpha: 0, duration: 0.6, ease: "power2.in" },"<");
+.to(navRef.current, { y: -100, autoAlpha: 0, duration: 0.6, ease: "power2.in" },"<");
 
-flowTl.to(".buddy-cookie", {
+flowTl.to(buddyRef.current, {
     y: "-30vh", 
     scale: 0.25,
     duration: 3,
@@ -360,13 +363,13 @@ flowTl.to({}, { duration: 1 });
   return (
 
     <main ref={containerRef} className="relative overflow-x-hidden ">
-      <NavBar/>
+      <NavBar ref={navRef}/>
       
 
       
       <div ref={introRef} className="relative h-screen w-full overflow-hidden">
         <Hero />
-        <RollingCookie/>
+        <RollingCookie ref={cookieRef}/>
         <VideoPortal />
         
       </div>
@@ -391,7 +394,7 @@ flowTl.to({}, { duration: 1 });
           <FindStore />
         </div>
         
-        <BuddyCookie />
+        <BuddyCookie ref={buddyRef} />
 
       </div>
       

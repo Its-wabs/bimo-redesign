@@ -57,13 +57,18 @@ export default function FullScreenMenu({ isOpen, onClose }: { isOpen: boolean; o
       duration: 0.4,
       color : "#E31E24",
       ease : "power2.in"
-    }, 0);
+    }, 0)
+    .to(linksRef.current[index], {
+      autoAlpha: 0,
+      duration: 0.4,
+      ease : "power2.in"
+    }, 0.5)
 
-    exitTl.to(waveContainerRef.current, {
+    .to(waveContainerRef.current, {
       y:"-130%",
       duration: 1,
       ease: "power4.inOut"
-    }, "+=0.3");
+    }, "+=0.5");
 
     exitTl.call(() => {
       router.push(href);

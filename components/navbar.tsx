@@ -1,5 +1,5 @@
 "use client";
-import {  useState } from "react";
+import {  forwardRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import FullScreenMenu from "./FullScreenMenu"; 
@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { useLiquidNavigation } from "@/hooks/useLiquidNavigation";
 
 
-export default function NavBar() {
+const NavBar = forwardRef<HTMLDivElement>((props, ref) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { navigate } = useLiquidNavigation();
@@ -31,7 +31,7 @@ export default function NavBar() {
     <>
       <FullScreenMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       
-      <nav className="fixed top-3 left-0 w-full flex items-center justify-between h-20 px-6 md:px-12 z-50 pointer-events-none">
+      <nav ref={ref} className="fixed top-3 left-0 w-full flex items-center justify-between h-20 px-6 md:px-12 z-50 pointer-events-none">
         
         {/* LEFT SECTION */}
         <div className="flex-1 flex justify-start items-center order-1 md:order-0 pointer-events-auto">
@@ -81,4 +81,8 @@ export default function NavBar() {
       </nav>
     </>
   );
-}
+});
+
+NavBar.displayName = "NavBar";
+
+export default NavBar;
