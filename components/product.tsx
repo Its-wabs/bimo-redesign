@@ -6,8 +6,8 @@ import { useGSAP } from "@gsap/react";
 import BimoButton from "./bimobutton";
 
 const PRODUCTS = [
-  { id: 1, name: "CLASSIC BIMO GALETTE", img: "/img/classic.png", bgColor: "#E97A3E" },
-  { id: 2, name: "DELICIOUS BIMO COOKIES", img: "/img/cookiez.png", bgColor: "#7C4DFF" },
+  { id: 1, name: "CLASSIC BIMO GALETTE", img: "/img/bimogallo.png", bgColor: "#E97A3E" },
+  { id: 2, name: "DELICIOUS BIMO COOKIES", img: "/img/cookie.png", bgColor: "#7C4DFF" },
   { id: 3, name: "IRRESISTIBLE BIMO TANGO", img: "/img/tangooo.png", bgColor: "#4CAF50" }
 ];
 

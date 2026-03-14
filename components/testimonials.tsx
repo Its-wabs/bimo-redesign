@@ -77,9 +77,7 @@ export default function TestimonialSection() {
     mm.add("(max-width: 767px)", () => {
       
       gsap.set(".testimonial-card", { clearProps: "rotation" });
-      
-     
-      marquee.duration(15);
+    
     });
 
     return () => mm.revert(); 
@@ -91,7 +89,7 @@ export default function TestimonialSection() {
       <div className="absolute inset-0 z-0 pointer-events-none opacity-5" 
            style={{ backgroundImage: `url("/img/bg-pattern.jpg")`, backgroundSize: 'cover' }} />
 
-      <div className="z-10 text-center mb-6 md:mb-10 px-6">
+      <div className="z-10 text-center mb-6 md:mb-6 px-6">
         <h2 className="text-3xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight">
           Every Cookie <br className="md:hidden" /> tells a Story
         </h2>
@@ -106,15 +104,11 @@ export default function TestimonialSection() {
       </div>
 
       <div className="testimonial-footer flex flex-col items-center gap-6 md:gap-[3vh] z-10 md:mb-[2vh]">
-        <h3 className="text-lg md:text-3xl font-bold text-white italic opacity-90 px-4">
-          What’s your story? Share it with us
-        </h3>
+       <h3 className="text-lg md:text-3xl font-bold text-white italic opacity-90 px-4">
+  What's your story? Share it with <span className="text-[#FFCB9A]">#BimoStories</span>
+</h3>
         
-        <div className="flex gap-10 text-white text-4xl md:text-6xl">
-            <i className="ri-instagram-line hover:text-[#FFCB9A] transition-all cursor-pointer"></i>
-            <i className="ri-facebook-circle-line hover:text-[#FFCB9A] transition-all cursor-pointer"></i>
-            <i className="ri-tiktok-fill hover:text-[#FFCB9A] transition-all cursor-pointer"></i>
-        </div>
+        
       </div>
     </section>
   );
