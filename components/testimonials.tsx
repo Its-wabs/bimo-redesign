@@ -19,8 +19,8 @@ const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) =
     className="testimonial-card shrink-0 m-8 rounded-3xl shadow-xl transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-6"
     style={{ backgroundColor: color,
        transform: `rotate(${rotate}deg)`,
-       width: 'clamp(15rem, 100vw, 22rem)',  
-      height: 'clamp(15rem, 100vw, 22rem)',
+       width: 'clamp(22rem, 100vw, 10rem)',  
+      height: 'clamp(22rem, 100vw, 10rem)',
        }}
   >
     {/* Placeholder for text content if needed later */}
