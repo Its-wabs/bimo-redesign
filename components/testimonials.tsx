@@ -18,8 +18,7 @@ const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) =
     className="testimonial-card aspect-square shrink-0 m-4 md:m-8 rounded-3xl shadow-xl transition-all hover:scale-105 cursor-pointer flex items-center justify-center p-6"
     style={{ 
        backgroundColor: color,
-       // FIX: Use vh/vw so they scale down on small height laptops
-      width: 'clamp(14rem, 25vmin, 22rem)',
+      width: 'clamp(20rem, 35vmin, 30rem)',
        transform: `rotate(${rotate}deg)`,
     }}
   >
@@ -76,14 +75,14 @@ export default function TestimonialSection() {
     });
 
     mm.add("(max-width: 767px)", () => {
-      // MOBILE ONLY: Force cards to stop wiggling and reset rotation
+      
       gsap.set(".testimonial-card", { clearProps: "rotation" });
       
-      // Speed up the marquee slightly for mobile "flicker" feel
+     
       marquee.duration(15);
     });
 
-    return () => mm.revert(); // Clean up everything perfectly
+    return () => mm.revert(); 
   }, { scope: containerRef });
 
   return (

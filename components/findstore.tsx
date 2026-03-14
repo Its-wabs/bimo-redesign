@@ -50,7 +50,7 @@ const FindStore = () => {
             </div>
 
             
-            <footer className="w-full min-h-[80vh] bg-[#151414] text-white pt-7 md:pt-32 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10">
+            <footer className="w-full min-h-[80vh] bg-[#151414] text-white pt-7 md:pt-22 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10">
                 
                     {/* empty space for buddy cookie */}
                    <div className="h-[10vh] md:h-20 w-full" />
@@ -70,7 +70,7 @@ const FindStore = () => {
                         </button>
                     </div>
 
-                   <div className="mb-4 md:mb-10 flex justify-center w-full max-h-[15vh] md:max-h-[25vh]">
+                   <div className="mb-4 md:mb-6 flex justify-center w-full max-h-[15vh] md:max-h-[25vh]">
             <Image 
                 src="/img/logo.png" 
                 alt="Logo" 
@@ -98,7 +98,7 @@ const FindStore = () => {
                         <a href="#" className="font-bold uppercase text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">About</a>
                     </div>
 
-                    <div className=" w-full md:max-w-[85vw] flex  justify-between items-center mb-2 md:mb-1 mt-7 md:mt-16 md:pt-8">
+                    <div className="absolute w-full md:max-w-[85vw] bottom-2 flex  justify-between items-center mb-2 md:mb-1 mt-7 md:mt-16 md:pt-8">
                         <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">privacy <span className="hidden md:inline">& policy</span></a>
                         <p className="text-xs md:text-sm font-medium text-[#E31E24]/80 flex gap-2">© Groupe Bimo <span className="text-gray-200">2026</span></p>
                         <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">terms <span className="hidden md:inline">of service</span></a>
