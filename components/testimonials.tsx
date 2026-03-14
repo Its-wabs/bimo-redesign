@@ -98,7 +98,7 @@ export default function TestimonialSection() {
         </h2>
       </div>
 
-      <div className="relative w-full overflow-hidden z-10 mb-10 md:mb-16">
+      <div className="relative w-full overflow-hidden z-10 mb-10 md:mb-[2vh]">
         <div className="card-row flex w-fit">
           {[...cards, ...cards].map((card, idx) => (
             <TestimonialCard key={idx} color={card.color} rotate={card.rotate} />
@@ -106,7 +106,7 @@ export default function TestimonialSection() {
         </div>
       </div>
 
-      <div className="testimonial-footer flex flex-col items-center gap-6 md:gap-8 z-10">
+      <div className="testimonial-footer flex flex-col items-center gap-6 md:gap-[3vh] z-10 md:mb-[2vh]">
         <h3 className="text-lg md:text-3xl font-bold text-white italic opacity-90 px-4">
           What’s your story? Share it with us
         </h3>
