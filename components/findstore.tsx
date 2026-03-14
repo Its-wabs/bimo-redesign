@@ -50,7 +50,7 @@ const FindStore = () => {
             </div>
 
             
-            <footer className="w-full min-h-[80vh] bg-[#151414] text-white pt-10 md:pt-32 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10">
+            <footer className="w-full min-h-[80vh] bg-[#151414] text-white pt-7 md:pt-32 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10">
                 
                     {/* empty space for buddy cookie */}
                    <div className="h-[10vh] md:h-20 w-full" />
@@ -59,7 +59,7 @@ const FindStore = () => {
                         Sign up to receive offers, updates & more
                     </p>
                     
-                    <div className="relative w-[80vw] md:w-280  mb-15">
+                    <div className="relative w-[80vw] md:w-280 mb-10 md:mb-15">
                         <input 
                             type="email" 
                             placeholder="Enter your email" 
