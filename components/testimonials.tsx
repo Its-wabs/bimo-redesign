@@ -16,131 +16,105 @@ const cards = [
 
 const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) => (
   <div 
-    className="testimonial-card shrink-0 m-8 rounded-3xl shadow-xl transition-transform hover:scale-105 cursor-pointer flex items-center justify-center p-6"
-    style={{ backgroundColor: color,
-       transform: `rotate(${rotate}deg)`,
-       width: 'clamp(22rem, 100vw, 10rem)',  
-      height: 'clamp(22rem, 100vw, 10rem)',
-       }}
+    className="testimonial-card h-40 w-40 md:h-90 md:w-90 shrink-0 m-4 md:m-8 rounded-3xl shadow-xl transition-all hover:scale-105 cursor-pointer flex items-center justify-center p-6"
+    style={{ 
+       backgroundColor: color,
+       
+    }}
   >
-    {/* Placeholder for text content if needed later */}
-    <div className="w-full h-full border-2 border-white/20 rounded-2xl border-dashed" />
+    <div className="w-full h-full border-2 border-white/20 rounded-2xl border-dashed flex items-center justify-center text-[#5C3526] font-bold opacity-30">
+        STORY BOX
+    </div>
   </div>
 );
 
 export default function TestimonialSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<gsap.core.Tween | null>(null);
-  const wiggleRef = useRef<gsap.core.Tween | null>(null);
-  const [isMobile,setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
- useGSAP(() => {
-    
+  useGSAP(() => {
+    // 1. SMOOTH MARQUEE
     marqueeRef.current = gsap.to(".card-row", {
       xPercent: -50,
-      duration: isMobile ? 20 : 30,
+      duration: isMobile ? 15 : 25, // Faster on mobile to feel "snappy"
       ease: "none",
       repeat: -1,
     });
 
-    //  THE MOVING WIGGLE ( desktop only for performance)
-    if(!isMobile) {
-       wiggleRef.current = gsap.to(".testimonial-card", {
-      rotation: "+=8",
-      yoyo: true,
-      repeat: -1,
-      duration: 0.8,
-      ease: "power1.inOut",
-      stagger: {
-        each: 0.2,
-        from: "random"
-      }
-    });
-
+    // 2. CONDITIONAL WIGGLE (Desktop Only)
+    if (!isMobile) {
+      gsap.to(".testimonial-card", {
+        rotation: "+=6", // Slightly smaller wiggle for elegance
+        yoyo: true,
+        repeat: -1,
+        duration: 1.5,
+        ease: "sine.inOut",
+        stagger: {
+          each: 0.3,
+          from: "random"
+        }
+      });
+    } else {
+      // If we switch to mobile, reset any stray rotations
+      gsap.set(".testimonial-card", { clearProps: "rotation" });
     }
-
-    return () => {
-      marqueeRef.current?.kill();
-      wiggleRef.current?.kill();
-    }
-   
 
   }, { scope: containerRef, dependencies: [isMobile] });
 
-  const handleMouseEnter = () => {
-    if(isMobile) return;
-    marqueeRef.current?.pause();
-    wiggleRef.current?.pause();
-    
-    gsap.getTweensOf(".testimonial-card").forEach(t => t.pause());
-  };
-
-  const handleMouseLeave = () => {
-    if(isMobile) return;
-    marqueeRef.current?.play();
-    wiggleRef.current?.play();
-    gsap.getTweensOf(".testimonial-card").forEach(t => t.play());
+  const handleInteraction = (pause: boolean) => {
+    if (isMobile) return;
+    pause ? marqueeRef.current?.pause() : marqueeRef.current?.play();
+    // We target the wiggles separately to ensure they pause too
+    pause ? gsap.getTweensOf(".testimonial-card").forEach(t => t.pause()) 
+          : gsap.getTweensOf(".testimonial-card").forEach(t => t.play());
   };
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-full flex flex-col text-center items-center justify-center bg-[#5C3526] overflow-hidden">
-       {/* Background Pattern */}
-      <div 
-        className="absolute inset-0 z-0 pointer-events-none opacity-10" 
-        style={{ 
-          backgroundImage: `url("/img/bg-pattern.jpg")`, 
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }} 
-      />
+    <section ref={containerRef} className="relative w-full min-h-full py-20 flex flex-col text-center items-center justify-center bg-[#5C3526] overflow-hidden">
+      
+      {/* Background Pattern */}
+      <div className="absolute inset-0 z-0 pointer-events-none opacity-5" 
+           style={{ backgroundImage: `url("/img/bg-pattern.jpg")`, backgroundSize: 'cover' }} />
 
-      {/* Main Heading */}
-      <div className="z-10 text-center mb-5">
-        <h2 className="testimonial-heading text-3xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight">
-          Every Cookie tells a Story
+      <div className="z-10 text-center mb-10 px-6">
+        <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight">
+          Every Cookie <br className="md:hidden" /> tells a Story
         </h2>
       </div>
 
-      {/* HORIZONTAL WALKING ROW */}
+      {/* MARQUEE ROW */}
       <div className="relative w-full overflow-hidden z-10 mb-16">
-        
-        <div className="card-row flex gap-6 md:gap-10 w-fit"
-        onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          >
+        <div 
+          className="card-row flex w-fit"
+          onMouseEnter={() => handleInteraction(true)}
+          onMouseLeave={() => handleInteraction(false)}
+        >
+          {/* Double the cards for a seamless loop */}
           {[...cards, ...cards].map((card, idx) => (
             <TestimonialCard key={idx} color={card.color} rotate={card.rotate} />
           ))}
         </div>
       </div>
 
-      {/* Footer Content */}
-      <div className="testimonial-footer flex flex-col items-center justify-center gap-6 z-10">
-        <h3 className="text-2xl md:text-3xl font-bold text-white text-center italic">
+      <div className="testimonial-footer flex flex-col items-center gap-8 z-10">
+        <h3 className="text-xl md:text-3xl font-bold text-white italic opacity-90">
           What’s your story? Share it with us
         </h3>
         
-        {/* Social Icons */}
-        <div className="flex gap-10 text-white text-5xl md:text-6xl">
-            <i className="ri-instagram-line  hover:text-[#FFCB9A] transition-colors cursor-pointer"></i>
-            <i className="ri-facebook-circle-line hover:text-[#FFCB9A] transition-colors cursor-pointer"></i>
-            <i className="ri-tiktok-fill hover:text-[#FFCB9A] transition-colors cursor-pointer"></i>
+        <div className="flex gap-12 text-white text-5xl md:text-6xl">
+            <i className="ri-instagram-line hover:text-[#FFCB9A] transition-all cursor-pointer hover:-translate-y-2"></i>
+            <i className="ri-facebook-circle-line hover:text-[#FFCB9A] transition-all cursor-pointer hover:-translate-y-2"></i>
+            <i className="ri-tiktok-fill hover:text-[#FFCB9A] transition-all cursor-pointer hover:-translate-y-2"></i>
         </div>
       </div>
-
-     
     </section>
   );
 }
