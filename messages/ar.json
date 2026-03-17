@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "shop": "تسوق"
+   
+  },
+   "menu": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "about": "من نحن",
+      "findStore": "اعثر على متجر"
+    },
+  "hero": {
+   
+    "cta": "استرجع الطعم"
+  },
+  "video": {
+    "tagline": "ذكريات في كل قضمة",
+    "since": "منذ 1998",
+    "cta": "اعرف المزيد"
+  },
+  "products": {
+    "carousel": {
+      "items": {
+        "classicBimoGalette": "غاليت بيمو الكلاسيكي",
+        "deliciousBimoCookies": "كوكيز بيمو اللذيذ",
+        "irresistibleBimoTango": "بيمو تانغو الذي لا يُقاوم"
+      },
+      "cta": "عرض المنتج"
+    }
+   
+  },
+   "collectionPage": {
+      "title": "مجموعتنا",
+      "items": {
+        "classicBimoGalette": "الغاليت الكلاسيكي",
+        "deliciousBimoCookies": "كوكيز بيمو اللذيذ",
+        "irresistibleBimoTango": "بيمو تانغو الذي لا يُقاوم"
+      },
+      "addToCart": "أضف إلى السلة",
+      "priceSuffix": "دج"
+    },
+  "testimonials": {
+    "title": "كل قطعة",
+    "titleHighlight": "تحكي قصة",
+    "subtitle": "ما قصتك؟ شاركها معنا",
+    "tag" : "#BimoStory"
+  },
+  "findStore": {
+    "availableIn": "متوفر في 68 ولاية",
+    "headline": "اعثر على بيمو بالقرب منك",
+    "cta": "ابحث عن متجر"
+  },
+  "footer": {
+    "signup": "اشترك لتصلك العروض والتحديثات والمزيد",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "submit": "إرسال",
+    "links": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "contact": "تواصل معنا",
+      "about": "من نحن"
+    },
+    "legal": {
+      "privacyShort": "الخصوصية",
+  "privacyFull": "والسياسة",
+  "termsShort": "الشروط",
+  "termsFull": "والأحكام"
+    },
+    "copyright": {
+      "groupeBimo": "© مجموعة بيمو",
+      "year": "2026"
+    }
+  },
+  "social": {
+    "instagram": "إنستغرام",
+    "tiktok": "تيك توك"
+  },
+  "preloader": {
+    "cooking": "يطبخ"
+  }
+  
+}

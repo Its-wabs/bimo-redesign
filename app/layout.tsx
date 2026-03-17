@@ -1,57 +1,18 @@
-import type { Metadata } from "next";
-import 'remixicon/fonts/remixicon.css';
-import { Cairo, Kanit } from 'next/font/google';
-import "./globals.css";
-import localFont from "next/font/local";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
-const peace = localFont({
-  src: [
-    {
-      path: '../public/fonts/PeaceSans.ttf',
-    },
-   
-  ],
-  variable: '--font-english'
-});
-
-const cairo = Cairo({
-  subsets: ['arabic', 'latin'],
-  variable: '--font-arabic',
-  weight: ['400', '700', '900'],
-  display: 'swap',
-});
-
-const kanit = Kanit({
-  subsets: ['latin'],
-  weight: ['400', '700', '800', '900'], 
-  variable: '--font-english',          
-  display: 'swap',
-});
-
-
-export const metadata: Metadata = {
-  title: "Group Bimo",
-  description: "Group Bimo official website",
-};
+// app/layout.tsx
+// ─────────────────────────────────────────────────────────────────────────────
+// Next.js App Router REQUIRES a root layout to exist.
+// This one is intentionally a passthrough — all the real layout work
+// (html, body, lang, dir, fonts, providers) lives in [locale]/layout.tsx.
+//
+// DO NOT add <html> or <body> here — [locale]/layout.tsx already has them.
+// Adding them here causes double <html> tags which breaks appearance.
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    
-    <html lang="en" className={`${peace.variable} ${cairo.variable}`} >
-  
-      <body
-      >
-        <SpeedInsights />
-        
-       
-        {children}
-      </body>
-    </html>
-   
-  );
+}) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return children as any;
 }

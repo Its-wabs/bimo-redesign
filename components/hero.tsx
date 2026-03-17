@@ -2,8 +2,11 @@
 import { useLiquidNavigation } from "@/hooks/useLiquidNavigation";
 import BimoButton from "./bimobutton";
 import { usePathname } from "next/navigation";
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
+
+  const t = useTranslations('hero');
 
     const { navigate } = useLiquidNavigation();
    
@@ -46,7 +49,7 @@ export default function Hero() {
         {/* Main Arabic Headline */}
         <div className="hero-text text-center flex flex-col items-center gap-8 md:gap-8">
           <h1 
-            dir="rtl" // Ensures Arabic punctuation and flow is correct
+            dir="rtl" 
             className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4 text-[16vw] md:text-[9vw] lg:text-[110px] font-arabic font-black text-black leading-[0.9] md:leading-none"
             style={{ 
               textShadow: `
@@ -68,7 +71,7 @@ export default function Hero() {
           
           {/* CTA Button */}
           <div className="pointer-events-auto mt-4" onClick={(e) => handleNavigation(e, "/products")}>
-            <BimoButton text="relive the taste" bgColor="#E31E24"  />
+            <BimoButton text={t("cta")} bgColor="#E31E24"  />
           </div>
         </div>
         

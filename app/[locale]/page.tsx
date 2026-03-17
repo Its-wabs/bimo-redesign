@@ -12,6 +12,9 @@ import BuddyCookie from "@/components/buddycookie";
 import TestimonialSection from "@/components/testimonials";
 import FindStore from "@/components/findstore";
 
+import {useTranslations} from 'next-intl';
+import Preloader from "@/components/pre-loader";
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -29,6 +32,8 @@ export default function Page() {
   const testimonialsRef = useRef<HTMLDivElement>(null);
   
   const [entranceDone, setEntranceDone] = useState(false);
+
+
 
   // Reload scroll management
 
@@ -363,6 +368,7 @@ flowTl.to({}, { duration: 1 });
   return (
 
     <main ref={containerRef} className="relative overflow-x-hidden ">
+      <Preloader />
       <NavBar ref={navRef}/>
       
 

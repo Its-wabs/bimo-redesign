@@ -3,33 +3,37 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from 'next-intl';
 
 const cards = [
-  { color: "#FFCB9A", rotate: "-2" },
-  { color: "#F5935C", rotate: "3" },
-  { color: "#FFF3E0", rotate: "-1" },
-  { color: "#FFD54F", rotate: "4" },
-  { color: "#FFCB9A", rotate: "-3" },
-  { color: "#F5935C", rotate: "2" },
+  { img: "/img/testimonials/post1.jpg", rotate: "-2" },
+  { img: "/img/testimonials/post2.jpg", rotate: "3" },
+  { img: "/img/testimonials/post3.jpg", rotate: "-1" },
+  { img: "/img/testimonials/post4.jpg", rotate: "4" },
+  { img: "/img/testimonials/post5.jpg", rotate: "-3" },
+  { img: "/img/testimonials/post6.jpg", rotate: "2" },
 ];
 
-const TestimonialCard = ({ color, rotate }: { color: string; rotate: string }) => (
+const TestimonialCard = ({ img, rotate }: { img: string; rotate: string }) => (
   <div 
-    className="testimonial-card aspect-square shrink-0 m-4 md:m-8 rounded-3xl shadow-xl transition-all hover:scale-105 cursor-pointer flex items-center justify-center p-6"
+    className="testimonial-card aspect-square shrink-0 m-4 md:m-8 rounded-3xl shadow-xl transition-all overflow-hidden cursor-pointer flex items-center justify-center"
     style={{ 
-       backgroundColor: color,
       width: 'clamp(20rem, 35vmin, 30rem)',
        transform: `rotate(${rotate}deg)`,
     }}
   >
-    <div className="w-full h-full border-2 border-white/20 rounded-2xl border-dashed flex items-center justify-center text-[#5C3526] font-bold opacity-30">
-        STORY BOX
-    </div>
+   <img
+      src={img}
+      alt="Bimo story"
+      className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+    />
   </div>
 );
 
 export default function TestimonialSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const t = useTranslations('testimonials');
 
   useGSAP(() => {
     const mm = gsap.matchMedia();
@@ -84,28 +88,28 @@ export default function TestimonialSection() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative w-full min-h-screen py-12 md:py-24 flex flex-col text-center items-center justify-center bg-[#5C3526] overflow-hidden">
+    <section  ref={containerRef} className="relative w-full min-h-screen py-12 md:py-24 flex flex-col text-center items-center justify-center bg-[#5C3526] overflow-hidden">
       
       <div className="absolute inset-0 z-0 pointer-events-none opacity-5" 
            style={{ backgroundImage: `url("/img/bg-pattern.jpg")`, backgroundSize: 'cover' }} />
 
       <div className="z-10 text-center mb-6 md:mb-6 px-6">
         <h2 className="text-3xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight">
-          Every Cookie <br className="md:hidden" /> tells a Story
+          {t("title")} <br className="md:hidden" /> {t("titleHighlight")}
         </h2>
       </div>
 
-      <div className="relative w-full overflow-hidden z-10 mb-10 md:mb-[2vh]">
+      <div dir="ltr" className="relative w-full overflow-hidden z-10 mb-10 md:mb-[2vh]">
         <div className="card-row flex w-fit">
           {[...cards, ...cards].map((card, idx) => (
-            <TestimonialCard key={idx} color={card.color} rotate={card.rotate} />
+            <TestimonialCard key={idx} img={card.img} rotate={card.rotate} />
           ))}
         </div>
       </div>
 
       <div className="testimonial-footer flex flex-col items-center gap-6 md:gap-[3vh] z-10 md:mb-[2vh]">
        <h3 className="text-lg md:text-3xl font-bold text-white italic opacity-90 px-4">
-  What's your story? Share it with <span className="text-[#FFCB9A]">#BimoStories</span>
+  {t("subtitle")} <span className="text-[#FFCB9A]">{t("tag")}</span>
 </h3>
         
         

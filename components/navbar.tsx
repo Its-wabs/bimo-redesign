@@ -4,12 +4,19 @@ import Link from "next/link";
 import Image from "next/image";
 import FullScreenMenu from "./FullScreenMenu"; 
 import BimoButton from "./bimobutton";
-import { usePathname } from "next/navigation";
+
 import { useLiquidNavigation } from "@/hooks/useLiquidNavigation";
+
+import { useTranslations, useLocale } from "next-intl";
+import { useRouter, usePathname } from "@/i18n/navigation";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 
 const NavBar = forwardRef<HTMLDivElement>((props, ref) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const t = useTranslations("nav");
+  const locale = useLocale();         
+   const router = useRouter();
 
   const { navigate } = useLiquidNavigation();
  
@@ -22,9 +29,11 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref) => {
 
     navigate(href);
   };
-  
-  
 
+   const handleLocaleSwitch = () => {
+    const nextLocale = locale === "en" ? "ar" : "en";
+    router.replace(pathname, { locale: nextLocale });
+  };
 
  
   return (
@@ -67,9 +76,10 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref) => {
             <div className="h-1 w-6 bg-black rounded-full transition-all group-hover:w-full group-hover:bg-[#E31E24]"></div>
           </div>
 
-        <Link href="/products" onClick={(e) => handleNavigation(e, "/products")} className="hidden md:block">
+          <div className="flex md:gap-2">
+            <Link href="/products" onClick={(e) => handleNavigation(e, "/products")} className="hidden md:block">
             <BimoButton 
-              text="Shop"
+              text={t("shop")}
               bgColor="rgba(0,0,0,0.1)"
               shadowColor="rgba(0,0,0,0.2)"                   
               paddingX="px-6"                   
@@ -77,6 +87,19 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref) => {
               fontSize="text-base"              
             />
           </Link>
+          <div className="hidden md:inline">
+              {/* Language switcher  */}
+          <LanguageSwitcher 
+          locale={locale} 
+          
+          toggleLanguage={handleLocaleSwitch} 
+        />
+
+          </div>
+        
+
+          </div>
+        
         </div>
       </nav>
     </>

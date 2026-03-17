@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+
+* {
+  
+  box-sizing: border-box;
+}
+
+
+@layer base {
+  :root {
+    --bimo-red: #E31E24;
+    --bimo-gold: #F2A950;
+    --bimo-cream: #FDF6E9;
+    --bimo-chocolate: #3D1E12; 
+    --bimo-dark: #151414;
+  }
+  
+}
+
+
+.font-arabic {
+  font-family: var(--font-arabic), sans-serif;
+}
+
+.font-english {
+  font-family: var(--font-english), sans-serif;
+}
+
+[dir="rtl"] body,
+[dir="rtl"] * {
+  font-family: var(--font-arabic);
+  font-weight: 900; 
+}
+
+/* preloader  */
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffefd2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.cookie-animation {
+  width: 200px;
+  height: 200px;
+  background-image: url('/img/bimostrip1.png');
+  background-size: 2400px 200px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+.loading-text {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #2A1810;
+  font-family: inherit;
+  opacity: 0.7;
+}

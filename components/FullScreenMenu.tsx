@@ -3,189 +3,198 @@ import { useRef, useEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { usePathname, useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
+
+import { usePathname, useRouter } from "@/i18n/navigation";
+
+import LanguageSwitcher from "./LanguageSwitcher";
+
 
 const MENU_LINKS = [
-  { name: "Home", href: "/" },
-  { name: "Products", href: "/products" },
-  { name: "About Us", href: "/#" },
-  { name: "Find a Store", href: "/#" },
-];
+  { key: "home",      href: "/" },
+  { key: "products",  href: "/products" },
+  { key: "about",     href: "/#" },
+  { key: "findStore", href: "/#" },
+] as const;
 
-export default function FullScreenMenu({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export default function FullScreenMenu({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
+  const t = useTranslations("menu");
   const router = useRouter();
-  const pathname = usePathname();
+  const pathname = usePathname(); 
 
-  const containerRef = useRef<HTMLDivElement>(null);
+  const locale = useLocale();
+
+  const containerRef    = useRef<HTMLDivElement>(null);
   const waveContainerRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<HTMLDivElement[]>([]);
-  const tl = useRef<gsap.core.Timeline | null>(null);
+  const linksRef        = useRef<HTMLDivElement[]>([]);
+  const tl              = useRef<gsap.core.Timeline | null>(null);
 
-  const { contextSafe } = useGSAP( { scope: containerRef });
+  const { contextSafe } = useGSAP({ scope: containerRef });
 
-  const handleLinkClick = contextSafe((e: React.MouseEvent, href : string, index : number) => {
-    e.preventDefault();
+  const handleLinkClick = contextSafe(
+    (e: React.MouseEvent, href: string, index: number) => {
+      e.preventDefault();
 
-    if (href === pathname) {
-      onClose();
-      return;
-    }
-
-    if (tl.current) tl.current.kill();
-
-    const exitTl = gsap.timeline({
-      onComplete: () => {
-        gsap.set(containerRef.current, { visibility : "hidden"});
+      
+      if (href === pathname) {
         onClose();
+        return;
       }
-    });
 
-    linksRef.current.forEach((link, i) => {
+      if (tl.current) tl.current.kill();
 
-      if(i !== index) {
-        exitTl.to(link, {
-          opacity: 0,
-          y: -30,
-          duration: 0.3,
-          ease: "power2.in",
-        }, 0);
-      }
-    });
+      const exitTl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(containerRef.current, { visibility: "hidden" });
+          onClose();
+        },
+      });
 
-    exitTl.to(linksRef.current[index], {
-      scale: 1.2,
-      duration: 0.4,
-      color : "#E31E24",
-      ease : "power2.in"
-    }, 0)
-    .to(linksRef.current[index], {
-      autoAlpha: 0,
-      duration: 0.4,
-      ease : "power2.in"
-    }, 0.5)
+     
+      linksRef.current.forEach((link, i) => {
+        if (i !== index) {
+          exitTl.to(link, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, 0);
+        }
+      });
 
-    .to(waveContainerRef.current, {
-      y:"-130%",
-      duration: 1,
-      ease: "power4.inOut"
-    }, "+=0.5");
+     
+      exitTl
+        .to(linksRef.current[index], { scale: 1.2, color: "#E31E24", duration: 0.4, ease: "power2.in" }, 0)
+        .to(linksRef.current[index], { autoAlpha: 0, duration: 0.4, ease: "power2.in" }, 0.5)
+        .to(waveContainerRef.current, { y: "-130%", duration: 1, ease: "power4.inOut", }, "+=0.7");
 
-    exitTl.call(() => {
-      router.push(href);
-    }, [], "-=0.5");
+      exitTl.call(() => { router.push(href); }, [], "-=0.6");
+    }
+  );
 
-
-  })
-
-  // Scroll lock when menu is open
+  // Scroll lock
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
   }, [isOpen]);
 
-  useGSAP(() => {
-    if (isOpen) {
-      if (tl.current) tl.current.kill();
-      tl.current = gsap.timeline();
+  useGSAP(
+    () => {
+      if (isOpen) {
+        // Kill any running timeline before starting open
+        if (tl.current) tl.current.kill();
+        tl.current = gsap.timeline();
 
-      // Show main container
-      gsap.set(containerRef.current, { visibility: "visible" });
+        gsap.set(containerRef.current, { visibility: "visible" });
 
-      // Slide chocolate down with Rainbow effect
-      tl.current.to(waveContainerRef.current, {
-        y: "0%",
-        duration: 1,
-        ease: "power4.inOut",
-      }, 0);
+        tl.current
+          .to(waveContainerRef.current, { y: "0%", duration: 1, ease: "power4.inOut" }, 0)
+          .fromTo(
+            waveContainerRef.current,
+            { filter: "hue-rotate(0deg) brightness(2) saturate(2)" },
+            {
+              filter: "hue-rotate(360deg) brightness(1) saturate(1)",
+              duration: 1.2,
+              ease: "none",
+              onComplete: () => { gsap.set(waveContainerRef.current, { filter: "none" }); },
+            },
+            0
+          )
+          .fromTo(
+            linksRef.current,
+            { y: 100, opacity: 0, skewY: 5 },
+            { y: 0, opacity: 1, skewY: 0, duration: 0.8, stagger: 0.1, ease: "power4.out" },
+            "-=0.4"
+          )
+          .fromTo(
+            ".switcher",
+            { y: -100, opacity: 0, skewY: 5 },
+            { y: 0, opacity: 1, skewY: 0, duration: 0.8, stagger: 0.1, ease: "power4.out" },
+            "-=0.2"
+          );
+      } else {
+      
+        if (tl.current) tl.current.kill();
 
-      // RAINBOW TRANSITION 
-      tl.current.fromTo(waveContainerRef.current, 
-        { filter: "hue-rotate(0deg) brightness(2) saturate(2)" },
-        { 
-          filter: "hue-rotate(360deg) brightness(1) saturate(1)", 
-          duration: 1.2, 
-          ease: "none",
-          onComplete: () => { gsap.set(waveContainerRef.current, { filter: "none" }); }
-        }, 0);
+        
+        gsap.set(linksRef.current, { clearProps: "color,scale" });
 
-      // TEXT REVEAL
-      tl.current.fromTo(
-        linksRef.current,
-        { y: 100, opacity: 0, skewY: 5 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          skewY: 0,
-          duration: 0.8, 
-          stagger: 0.1, 
-          ease: "power4.out" 
-        },
-        "-=0.4"
-      );
-    } else {
-      const exitTl = gsap.timeline({
-        onComplete: () => {gsap.set(containerRef.current, { visibility: "hidden" })} 
-      });
+        const exitTl = gsap.timeline({
+          onComplete: () => {
+            gsap.set(containerRef.current, { visibility: "hidden" });
+            
+            gsap.set(linksRef.current, { clearProps: "all" });
+          },
+        });
 
-      // Slide links up and out
-      exitTl.to(linksRef.current, { 
-        y: -50, 
-        opacity: 0, 
-        duration: 0.4, 
-        stagger: 0.05 
-      });
+        exitTl
+          .to(linksRef.current, { y: -50, opacity: 0, duration: 0.4, stagger: 0.05 })
+          .to(waveContainerRef.current, { y: "-130%", duration: 0.8, ease: "power4.inOut" }, "-=0.2");
+      }
+    },
+    { dependencies: [isOpen], scope: containerRef }
+  );
 
-      // Retract chocolate 
-      exitTl.to(waveContainerRef.current, {
-        y: "-130%",
-        duration: 0.8,
-        ease: "power4.inOut",
-      }, "-=0.2");
-    }
-  }, { dependencies: [isOpen], scope: containerRef });
+    const handleLocaleSwitch = () => {
+    const nextLocale = locale === "en" ? "ar" : "en";
+    router.replace(pathname, { locale: nextLocale });
+  };
+
 
   return (
-    <div 
-      ref={containerRef}
-      className="fixed inset-0 z-100 invisible pointer-events-none"
-    >
-      {/* THE WAVY CHOCOLATE CONTAINER */}
-      <div 
+    <div ref={containerRef} className="fixed inset-0 z-100 invisible pointer-events-none">
+      {/* WAVY CHOCOLATE CONTAINER */}
+      <div
         ref={waveContainerRef}
         className="absolute inset-0 -translate-y-[130%] pointer-events-none w-full h-[120%] bg-[#3D1E12]"
       >
-        {/* The Wave SVG */}
-        <svg 
+        <svg
           className="absolute bottom-0 left-0 w-full h-[15%] translate-y-[98%]"
-          viewBox="0 0 1440 320" 
+          viewBox="0 0 1440 320"
           preserveAspectRatio="none"
         >
-          <path 
-            fill="#3D1E12" 
-            d="M0,160 C120,320 240,0 360,160 C480,320 600,0 720,160 C840,320 960,0 1080,160 C1200,320 1320,0 1440,160 L1440,0 L0,0 Z" 
+          <path
+            fill="#3D1E12"
+            d="M0,160 C120,320 240,0 360,160 C480,320 600,0 720,160 C840,320 960,0 1080,160 C1200,320 1320,0 1440,160 L1440,0 L0,0 Z"
           />
         </svg>
       </div>
 
       {/* CONTENT LAYER */}
-      <div className={`relative z-10 h-full w-full flex flex-col items-center justify-center transition-opacity duration-300 ${isOpen ? "opacity-100 pointer-events-auto" : "opacity-0"}`}>
-        
+      <div
+        className={`relative z-10 h-full w-full flex flex-col items-center justify-center transition-opacity duration-300 ${
+          isOpen ? "opacity-100 pointer-events-auto" : "opacity-0"
+        }`}
+      >
         {/* CLOSE BUTTON */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-10 right-10 group flex items-center gap-4 text-white cursor-pointer"
         >
-          
           <div className="w-12 h-12 border border-white/10 rounded-full flex items-center justify-center group-hover:bg-[#E31E24] group-hover:border-[#E31E24] transition-all duration-300">
-             <span className="text-xl leading-none">✕</span>
+            <span className="text-xl leading-none">✕</span>
           </div>
+          
         </button>
+         <div className="switcher absolute top-10 left-10 inline md:hidden">
+          {/* Language switcher  */}
+          <LanguageSwitcher 
+          locale={locale} 
+          
+          toggleLanguage={handleLocaleSwitch} 
+        />
+          
+        </div>
+
+         
 
         {/* NAVIGATION */}
-        <nav className="flex flex-col items-center">
+        <nav className="flex flex-col items-center gap-3 md:gap-6">
           {MENU_LINKS.map((link, i) => (
-            <div 
-              key={link.name} 
-              className="overflow-hidden mb-2 px-4"
+            <div
+              key={link.key}
+              className="mb-2 px-4"
               ref={(el) => { if (el) linksRef.current[i] = el; }}
             >
               <Link
@@ -193,7 +202,7 @@ export default function FullScreenMenu({ isOpen, onClose }: { isOpen: boolean; o
                 onClick={(e) => handleLinkClick(e, link.href, i)}
                 className="block text-white font-black text-5xl md:text-[8rem] leading-[0.85] uppercase tracking-tighter hover:text-[#E31E24] hover:scale-105 transition-all duration-300"
               >
-                {link.name}
+                {t(link.key)}
               </Link>
             </div>
           ))}
@@ -203,7 +212,7 @@ export default function FullScreenMenu({ isOpen, onClose }: { isOpen: boolean; o
         <div className="absolute bottom-12 w-full px-12 flex flex-col md:flex-row justify-between items-center gap-6 text-white/30 font-bold text-[10px] tracking-[0.3em] uppercase">
           <div className="flex gap-10">
             <a href="#" className="hover:text-white transition-colors">Instagram</a>
-            <a href="#" className="hover:text-white transition-colors">Tiktok</a>
+            <a href="#" className="hover:text-white transition-colors">TikTok</a>
           </div>
           <p>©2026 BIMO CORPORATE</p>
         </div>

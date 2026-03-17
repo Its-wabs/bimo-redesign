@@ -1,4 +1,3 @@
-// hooks/useLiquidNavigation.ts
 import gsap from "gsap";
 import { useRouter } from "next/navigation";
 
@@ -18,8 +17,9 @@ export const useLiquidNavigation = () => {
       pointer-events: none;
       display: flex;
       transform: translateX(115%);
+      dir: ltr;
     `;
-
+    overlay.setAttribute("dir", "ltr");
     // left wave
     const leftWave = document.createElement("div");
     leftWave.style.cssText = "height: 130%; width: 15vw;  margin-left: -14.8vw; position: relative; flex-shrink: 0; z-index: 2; margin-right: -2px;";
@@ -49,17 +49,36 @@ export const useLiquidNavigation = () => {
     overlay.appendChild(rightWave);
     document.body.appendChild(overlay);
 
-    const tl = gsap.timeline({
-      onComplete: () => overlay.remove() 
+    const tl = gsap.timeline();
+
+   
+    tl.to(overlay, { 
+      x: 0, 
+      duration: 0.8, 
+      ease: "power4.out",
+      onComplete: () => {
+        
+        router.push(href);
+        
+       
+        gsap.delayedCall(0.4, () => {
+           // Uncover the new page
+           gsap.to(overlay, {
+             x: "-130%",
+             duration: 0.8,
+             ease: "power4.in",
+             onComplete: () => overlay.remove()
+           });
+        });
+      }
     });
 
-
-    tl.to(overlay, { x: 0, duration: 1, ease: "power4.inOut" })
-      .fromTo(overlay, 
-        { filter: "hue-rotate(0deg) brightness(2)" }, 
-        { filter: "hue-rotate(360deg) brightness(1)", duration: 1.2, ease: "none" }, 0)
-      .add(() => router.push(href), "-=0.1") 
-      .to(overlay, { x: "-130%", duration: 1, ease: "power4.inOut" }, "-=0.4"); 
+   
+    tl.to(overlay, { 
+      filter: "hue-rotate(360deg)", 
+      duration: 0.8, 
+      ease: "none" 
+    }, 0);
   };
 
   return { navigate };

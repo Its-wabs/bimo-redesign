@@ -4,11 +4,12 @@ import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import BimoButton from "./bimobutton";
+import { useTranslations } from 'next-intl';
 
 const PRODUCTS = [
-  { id: 1, name: "CLASSIC BIMO GALETTE", img: "/img/bimogallo.png", bgColor: "#E97A3E" },
-  { id: 2, name: "DELICIOUS BIMO COOKIES", img: "/img/cookie.png", bgColor: "#7C4DFF" },
-  { id: 3, name: "IRRESISTIBLE BIMO TANGO", img: "/img/tangooo.png", bgColor: "#4CAF50" }
+  { id: 1, key: "classicBimoGalette", img: "/img/bimogallo.png", bgColor: "#E97A3E" },
+  { id: 2, key: "deliciousBimoCookies", img: "/img/cookie.png", bgColor: "#7C4DFF" },
+  { id: 3, key: "irresistibleBimoTango", img: "/img/tangooo.png", bgColor: "#4CAF50" }
 ];
 
 export default function ProductSection() {
@@ -25,6 +26,8 @@ export default function ProductSection() {
   const nextIndex = (index + 1) % PRODUCTS.length;
 
   const [isDesktop, setIsDesktop] = useState(false);
+
+  const t = useTranslations("products.carousel");
 
   useEffect(() => {
     const checkDesktop = () => setIsDesktop(window.innerWidth >= 1024);
@@ -162,18 +165,18 @@ export default function ProductSection() {
        
 
           <div className="floating-product relative w-full h-full z-20 ">
-            <Image src={currentProduct.img} alt={currentProduct.name} fill priority className="object-contain" />
+            <Image src={currentProduct.img} alt={currentProduct.key} fill priority className="object-contain" />
           </div>
         </div>
 
         <div className="product-text text-center flex flex-col items-center">
           <h2 className="text-white text-2xl md:text-4xl font-black uppercase tracking-tighter mb-6">
-            {currentProduct.name}
+            {t(`items.${currentProduct.key}`)}
           </h2>
           
           <div className="pointer-events-auto inline-flex z-30 mb-8">
                 <BimoButton 
-             text="View product" 
+             text={t("cta")} 
            />
           </div>
 

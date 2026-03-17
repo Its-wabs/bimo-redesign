@@ -1,0 +1,82 @@
+{
+  "nav": {
+    "shop": "Shop"
+    
+  },
+  "menu": {
+      "home": "Home",
+      "products": "Products",
+      "about": "About Us",
+      "findStore": "Find a Store"
+    },
+  "hero": {
+   
+    "cta": "relive the taste"
+  },
+  "video": {
+    "tagline": "Memories in every bite",
+    "since": "Since 1998",
+    "cta": "Learn more"
+  },
+  "products": {
+    "carousel": {
+      "items": {
+        "classicBimoGalette": "CLASSIC BIMO GALETTE",
+        "deliciousBimoCookies": "DELICIOUS BIMO COOKIES",
+        "irresistibleBimoTango": "IRRESISTIBLE BIMO TANGO"
+      },
+      "cta": "View product"
+    }
+   
+  },
+   "collectionPage": {
+      "title": "Our Collection",
+      "items": {
+        "classicBimoGalette": "The Classic Galette",
+        "deliciousBimoCookies": "Chocolate Cookies",
+        "irresistibleBimoTango": "Tango galette"
+      },
+      "addToCart": "Add to Cart",
+      "priceSuffix": "DA"
+    },
+  "testimonials": {
+    "title": "Every Bite",
+    "titleHighlight": "Tells a Story",
+    "subtitle": "What’s your story? Share it with",
+    "tag" : "#BimoStory"
+  },
+  "findStore": {
+    "availableIn": "Available in 68 Wilaya",
+    "headline": "Find Bimo near you",
+    "cta": "Find store"
+  },
+  "footer": {
+    "signup": "Sign up to receive offers, updates & more",
+    "emailPlaceholder": "Enter your email",
+    "submit": "Submit",
+    "links": {
+      "home": "Home",
+      "products": "Products",
+      "contact": "Contact",
+      "about": "About"
+    },
+    "legal": {
+      "privacyShort": "privacy",
+  "privacyFull": "& policy",
+  "termsShort": "terms",
+  "termsFull": "of service"
+    },
+    "copyright": {
+      "groupeBimo": "© Groupe Bimo",
+      "year": "2026"
+    }
+  },
+  "social": {
+    "instagram": "Instagram",
+    "tiktok": "Tiktok"
+  },
+  "preloader": {
+    "cooking": "cooking"
+  }
+  
+}
