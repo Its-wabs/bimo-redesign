@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useLiquidNavigation } from "../../../hooks/useLiquidNavigation";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Preloader from "@/components/pre-loader";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -23,6 +23,8 @@ const PRODUCTS = [
 export default function ProductsPage() {
   const t  = useTranslations("collectionPage");
   const tf = useTranslations("footer");
+
+  const locale = useLocale();
 
   const containerRef = useRef(null);
   const { navigate } = useLiquidNavigation();
@@ -48,6 +50,15 @@ export default function ProductsPage() {
       },
     });
   }, { scope: containerRef });
+
+  useGSAP(() => {
+    // Every time 'locale' changes, do a quick fade on the text elements
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0, filter: "blur(4px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" }
+    );
+  }, { scope: containerRef, dependencies: [locale] });
 
   return (
     <main ref={containerRef} className="relative min-h-screen bg-[#FDF6E9] overflow-x-hidden">

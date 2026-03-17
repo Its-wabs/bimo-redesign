@@ -3,15 +3,25 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { useTranslations } from 'next-intl';
+import { useGSAP } from '@gsap/react';
 
-export default function Preloader() {
+ 
+interface PreloaderProps {
+  onComplete: () => void;
+}
+
+
+ 
+export default function Preloader({ onComplete }: PreloaderProps) {
   const cookieRef = useRef<HTMLDivElement>(null);
   const preloaderRef = useRef<HTMLDivElement>(null);
+
   const [isComplete, setIsComplete] = useState(false);
+  
 
   const t = useTranslations("preloader");
 
-  useEffect(() => {
+ useGSAP(() => {
     
     gsap.to(cookieRef.current, {
       x: "random(-3, 3)",       
@@ -33,6 +43,7 @@ export default function Preloader() {
           ease: "expo.inOut",   
           onComplete: () => {
             setIsComplete(true);
+            onComplete();
           }
         });
       }
@@ -56,6 +67,7 @@ export default function Preloader() {
     
 
   }, []);
+
 
   if (isComplete) return null;
 

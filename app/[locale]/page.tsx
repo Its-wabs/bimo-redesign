@@ -11,8 +11,6 @@ import ProductSection from "@/components/product";
 import BuddyCookie from "@/components/buddycookie";
 import TestimonialSection from "@/components/testimonials";
 import FindStore from "@/components/findstore";
-
-import {useTranslations} from 'next-intl';
 import Preloader from "@/components/pre-loader";
 
 
@@ -32,6 +30,8 @@ export default function Page() {
   const testimonialsRef = useRef<HTMLDivElement>(null);
   
   const [entranceDone, setEntranceDone] = useState(false);
+   const [preloaderDone, setPreloaderDone] = useState(false);
+
 
 
 
@@ -56,6 +56,8 @@ export default function Page() {
 
   useGSAP(() => {
 
+    if (!preloaderDone) return;
+
     gsap.set(cookieRef.current, { 
       xPercent: -50, 
       yPercent: -50, 
@@ -75,7 +77,9 @@ export default function Page() {
       }
     });
 
-  }, {scope : containerRef});
+  }, {scope : containerRef , dependencies: [preloaderDone]});
+
+  
 
   // Master scene Logic
 
@@ -368,7 +372,7 @@ flowTl.to({}, { duration: 1 });
   return (
 
     <main ref={containerRef} className="relative overflow-x-hidden ">
-      <Preloader />
+       <Preloader onComplete={() => setPreloaderDone(true)} />
       <NavBar ref={navRef}/>
       
 
