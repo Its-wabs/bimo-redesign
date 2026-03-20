@@ -1,28 +1,42 @@
-"use client";
-import { useRef } from "react";
-import NavBar from "@/components/navbar";
-import BimoButton from "@/components/bimobutton";
-import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { useLiquidNavigation } from "../../../hooks/useLiquidNavigation";
-import { usePathname } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import Preloader from "@/components/pre-loader";
+'use client';
+import { useRef } from 'react';
+import NavBar from '@/components/navbar';
+import BimoButton from '@/components/bimobutton';
+import Image from 'next/image';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { useLiquidNavigation } from '../../../hooks/useLiquidNavigation';
+import { usePathname } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import Preloader from '@/components/pre-loader';
 
 gsap.registerPlugin(ScrollTrigger);
 
-
 const PRODUCTS = [
-  { id: 1, key: "classicBimoGalette",   price: "120.00", img: "/img/classic.png" },
-  { id: 2, key: "deliciousBimoCookies", price: "150.00", img: "/img/cookiez.png" },
-  { id: 3, key: "irresistibleBimoTango",      price: "140.00", img: "/img/tango1.png" },
+  {
+    id: 1,
+    key: 'classicBimoGalette',
+    price: '120.00',
+    img: '/img/classic.png',
+  },
+  {
+    id: 2,
+    key: 'deliciousBimoCookies',
+    price: '150.00',
+    img: '/img/cookiez.png',
+  },
+  {
+    id: 3,
+    key: 'irresistibleBimoTango',
+    price: '140.00',
+    img: '/img/tango1.png',
+  },
 ] as const;
 
 export default function ProductsPage() {
-  const t  = useTranslations("collectionPage");
-  const tf = useTranslations("footer");
+  const t = useTranslations('collectionPage');
+  const tf = useTranslations('footer');
 
   const locale = useLocale();
 
@@ -36,62 +50,81 @@ export default function ProductsPage() {
     navigate(href);
   };
 
-  useGSAP(() => {
-    gsap.to("nav", {
-      y: -100,
-      autoAlpha: 0,
-      duration: 0.4,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: ".footer",
-        start: "top 80%",
-        end: "bottom 50%",
-        toggleActions: "play none none reverse",
-      },
-    });
-  }, { scope: containerRef });
+  useGSAP(
+    () => {
+      gsap.to('nav', {
+        y: -100,
+        autoAlpha: 0,
+        duration: 0.4,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: '.footer',
+          start: 'top 80%',
+          end: 'bottom 50%',
+          toggleActions: 'play none none reverse',
+        },
+      });
+    },
+    { scope: containerRef }
+  );
 
-  useGSAP(() => {
-    // Every time 'locale' changes, do a quick fade on the text elements
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0, filter: "blur(4px)" },
-      { opacity: 1, filter: "blur(0px)", duration: 0.6, ease: "power2.out" }
-    );
-  }, { scope: containerRef, dependencies: [locale] });
+  useGSAP(
+    () => {
+      // Every time 'locale' changes, do a quick fade on the text elements
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0, filter: 'blur(4px)' },
+        { opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: 'power2.out' }
+      );
+    },
+    { scope: containerRef, dependencies: [locale] }
+  );
 
   return (
-    <main ref={containerRef} className="relative min-h-screen bg-[#FDF6E9] overflow-x-hidden">
-
+    <main
+      ref={containerRef}
+      className="relative min-h-screen overflow-x-hidden bg-[#FDF6E9]"
+    >
       <div
-        className="fixed inset-0 z-0 pointer-events-none opacity-10"
-        style={{ backgroundImage: `url("/img/bg-pattern.jpg")`, backgroundSize: "cover", backgroundPosition: "center" }}
+        className="pointer-events-none fixed inset-0 z-0 opacity-10"
+        style={{
+          backgroundImage: `url("/img/bg-pattern.jpg")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       />
 
       <NavBar />
 
       {/* COLLECTION SECTION */}
-      <section className="relative z-10 pt-24 md:pt-32 px-6 md:px-10 pb-20 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-7xl font-black text-[#3D1E12] uppercase tracking-tighter mb-8 md:mb-12 text-center md:text-start">
-          {t("title")}
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-20 md:px-10 md:pt-32">
+        <h1 className="mb-8 text-center text-4xl font-black tracking-tighter text-[#3D1E12] uppercase md:mb-12 md:text-start md:text-7xl">
+          {t('title')}
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:gap-10 lg:grid-cols-3">
           {PRODUCTS.map((product) => (
-            <div key={product.id} className="group flex flex-col items-center p-6 md:p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300">
-              <div className="w-full aspect-square relative mb-4 md:mb-6 group-hover:scale-105 transition-transform duration-500">
-                <img src={product.img} alt={t(`items.${product.key}`)} className="object-contain w-full h-full drop-shadow-xl" />
+            <div
+              key={product.id}
+              className="group flex flex-col items-center rounded-3xl bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-xl md:p-8"
+            >
+              <div className="relative mb-4 aspect-square w-full transition-transform duration-500 group-hover:scale-105 md:mb-6">
+                <img
+                  src={product.img}
+                  alt={t(`items.${product.key}`)}
+                  className="h-full w-full object-contain drop-shadow-xl"
+                />
               </div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-[#3D1E12] text-center">
+              <h3 className="text-center text-xl font-bold text-[#3D1E12] md:text-2xl">
                 {t(`items.${product.key}`)}
               </h3>
-              <p className="text-[#E31E24] font-black mb-4 md:mb-6">
-                {product.price} {t("priceSuffix")}
+              <p className="mb-4 font-black text-[#E31E24] md:mb-6">
+                {product.price} {t('priceSuffix')}
               </p>
 
               <BimoButton
-                text={t("addToCart")}
+                text={t('addToCart')}
                 paddingX="px-8"
                 paddingY="py-3"
                 fontSize="text-xs"
@@ -102,56 +135,91 @@ export default function ProductsPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="footer w-full min-h-[80vh] bg-[#151414] text-white pt-7 md:pt-22 pb-2 md:pb-8 px-6 flex flex-col items-center justify-center z-10 relative">
+      <footer className="footer relative z-10 flex min-h-[80vh] w-full flex-col items-center justify-center bg-[#151414] px-6 pt-7 pb-2 text-white md:pt-22 md:pb-8">
+        <div className="h-[10vh] w-full md:h-10" />
 
-        <div className="h-[10vh] md:h-10 w-full" />
-
-        <p className="text-md mt-5 md:mt-0 md:text-3xl font-english tracking-[0.2em] text-center uppercase mb-6 md:max-w-5xl">
-          {tf("signup")}
+        <p className="text-md font-english mt-5 mb-6 text-center tracking-[0.2em] uppercase md:mt-0 md:max-w-5xl md:text-3xl">
+          {tf('signup')}
         </p>
 
-        <div className="relative w-[90vw] md:w-280 mb-10 md:mb-15">
+        <div className="relative mb-10 w-[90vw] md:mb-15 md:w-280">
           <input
             type="email"
-            placeholder={tf("emailPlaceholder")}
-            className="w-full bg-white rounded-full py-5 md:py-6 px-8 md:px-12 text-black focus:outline-none text-sm md:text-base"
+            placeholder={tf('emailPlaceholder')}
+            className="w-full rounded-full bg-white px-8 py-5 text-sm text-black focus:outline-none md:px-12 md:py-6 md:text-base"
           />
-          <button className="absolute end-4 md:end-8 top-1/2 -translate-y-1/2 text-black font-english font-medium uppercase text-xs md:text-md tracking-tighter cursor-pointer hover:text-[#E31E24] transition-colors">
-            {tf("submit")}
+          <button className="font-english md:text-md absolute end-4 top-1/2 -translate-y-1/2 cursor-pointer text-xs font-medium tracking-tighter text-black uppercase transition-colors hover:text-[#E31E24] md:end-8">
+            {tf('submit')}
           </button>
         </div>
 
-        <div className="mb-6 md:mb-4 flex justify-center w-full max-h-[15vh] md:max-h-[25vh]">
-          <Image src="/img/logo.png" alt="Logo" width={500} height={300} className="w-auto h-full max-h-full object-contain" priority />
+        <div className="mb-6 flex max-h-[15vh] w-full justify-center md:mb-4 md:max-h-[25vh]">
+          <Image
+            src="/img/logo.png"
+            alt="Logo"
+            width={500}
+            height={300}
+            className="h-full max-h-full w-auto object-contain"
+            priority
+          />
         </div>
 
-        <div className="w-full md:w-[85vw] flex flex-col md:flex-row items-center justify-between gap-4 md:gap-2 md:mb-3 pt-4 md:pt-8">
-          <a href="/" onClick={(e) => handleNavigation(e, "/")} className="font-bold uppercase text-xl md:text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">
-            {tf("links.home")}
+        <div className="flex w-full flex-col items-center justify-between gap-4 pt-4 md:mb-3 md:w-[85vw] md:flex-row md:gap-2 md:pt-8">
+          <a
+            href="/"
+            onClick={(e) => handleNavigation(e, '/')}
+            className="text-xl font-bold tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-2xl"
+          >
+            {tf('links.home')}
           </a>
-          <a href="/products" onClick={(e) => handleNavigation(e, "/products")} className="font-bold uppercase text-xl md:text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">
-            {tf("links.products")}
+          <a
+            href="/products"
+            onClick={(e) => handleNavigation(e, '/products')}
+            className="text-xl font-bold tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-2xl"
+          >
+            {tf('links.products')}
           </a>
 
-          <div className="flex gap-6 text-3xl md:text-4xl text-gray-200 order-first md:order-0 my-4 md:my-0">
-            <i className="ri-facebook-circle-fill hover:text-[#E31E24] cursor-pointer transition-transform hover:-translate-y-1" />
-            <i className="ri-tiktok-fill hover:text-[#E31E24] cursor-pointer transition-transform hover:-translate-y-1" />
-            <i className="ri-instagram-line hover:text-[#E31E24] cursor-pointer transition-transform hover:-translate-y-1" />
+          <div className="order-first my-4 flex gap-6 text-3xl text-gray-200 md:order-0 md:my-0 md:text-4xl">
+            <i className="ri-facebook-circle-fill cursor-pointer transition-transform hover:-translate-y-1 hover:text-[#E31E24]" />
+            <i className="ri-tiktok-fill cursor-pointer transition-transform hover:-translate-y-1 hover:text-[#E31E24]" />
+            <i className="ri-instagram-line cursor-pointer transition-transform hover:-translate-y-1 hover:text-[#E31E24]" />
           </div>
 
-          <a href="#" className="font-bold uppercase text-xl md:text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">
-            {tf("links.contact")}
+          <a
+            href="#"
+            className="text-xl font-bold tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-2xl"
+          >
+            {tf('links.contact')}
           </a>
-          <a href="#" className="font-bold uppercase text-xl md:text-2xl tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">
-            {tf("links.about")}
+          <a
+            href="#"
+            className="text-xl font-bold tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-2xl"
+          >
+            {tf('links.about')}
           </a>
         </div>
 
-         <div className="absolute w-full md:max-w-[85vw] max-w-[90vw] bottom-0.5 md:bottom-2 flex  justify-between items-center mb-2 md:mb-1 mt-7 md:mt-16 md:pt-8">
-                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">{tf("legal.privacyShort")} <span className="hidden md:inline">{tf("legal.privacyFull")}</span></a>
-                        <p className="text-xs md:text-sm font-medium text-[#E31E24]/80 flex gap-2">{tf("copyright.groupeBimo")} <span className="text-gray-200">{tf("copyright.year")}</span></p>
-                        <a href="#" className="font-english uppercase text-xs md:text-sm tracking-widest text-gray-200 transition-transform hover:-translate-y-1 hover:text-[#E31E24]">{tf("legal.termsShort")} <span className="hidden md:inline">{tf("legal.termsFull")}</span></a>
-                    </div>
+        <div className="absolute bottom-0.5 mt-7 mb-2 flex w-full max-w-[90vw] items-center justify-between md:bottom-2 md:mt-16 md:mb-1 md:max-w-[85vw] md:pt-8">
+          <a
+            href="#"
+            className="font-english text-xs tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-sm"
+          >
+            {tf('legal.privacyShort')}{' '}
+            <span className="hidden md:inline">{tf('legal.privacyFull')}</span>
+          </a>
+          <p className="flex gap-2 text-xs font-medium text-[#E31E24]/80 md:text-sm">
+            {tf('copyright.groupeBimo')}{' '}
+            <span className="text-gray-200">{tf('copyright.year')}</span>
+          </p>
+          <a
+            href="#"
+            className="font-english text-xs tracking-widest text-gray-200 uppercase transition-transform hover:-translate-y-1 hover:text-[#E31E24] md:text-sm"
+          >
+            {tf('legal.termsShort')}{' '}
+            <span className="hidden md:inline">{tf('legal.termsFull')}</span>
+          </a>
+        </div>
       </footer>
     </main>
   );

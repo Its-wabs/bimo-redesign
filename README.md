@@ -55,8 +55,12 @@ npm run start
 
 ## 📁 Project Structure
 
+<<<<<<< HEAD
 ```
 bimo/
+=======
+`bimo/
+>>>>>>> fdc3743 (style : ran pretttier and format checking)
 ├── app/
 │   ├── [locale]/          # Internationalized routes
   ├── products/       # Products page for testing flow
@@ -87,8 +91,12 @@ bimo/
 ├── public/
 │   └── img/            # Optimized images
   ├── video/      # videoportal
+<<<<<<< HEAD
 └── package.json
 ```
+=======
+└── package.json`
+>>>>>>> fdc3743 (style : ran pretttier and format checking)
 
 ---
 

@@ -1,57 +1,53 @@
-"use client";
-import { useLiquidNavigation } from "@/hooks/useLiquidNavigation";
-import BimoButton from "./bimobutton";
-import { usePathname } from "next/navigation";
+'use client';
+import { useLiquidNavigation } from '@/hooks/useLiquidNavigation';
+import BimoButton from './bimobutton';
+import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 
 export default function Hero() {
-
   const t = useTranslations('hero');
 
-    const { navigate } = useLiquidNavigation();
-   
-    const pathname = usePathname();
-  
-    
-    const handleNavigation = (e: React.MouseEvent, href: string) => {
-      e.preventDefault();
-      if (href === pathname) return;
-  
-      navigate(href);
-    };
-    
+  const { navigate } = useLiquidNavigation();
+
+  const pathname = usePathname();
+
+  const handleNavigation = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    if (href === pathname) return;
+
+    navigate(href);
+  };
+
   return (
-    <section className="hero relative h-screen w-full flex flex-col items-center bg-[#FDF6E9] justify-start pt-[12vh] md:pt-[12vh] px-6 pointer-events-none overflow-hidden">
-      
+    <section className="hero pointer-events-none relative flex h-screen w-full flex-col items-center justify-start overflow-hidden bg-[#FDF6E9] px-6 pt-[12vh] md:pt-[12vh]">
       {/* Background Pattern */}
-      <div 
-        className="hero absolute inset-0 z-0 pointer-events-none opacity-10" 
-        style={{ 
-          backgroundImage: `url("/img/bg-pattern.jpg")`, 
+      <div
+        className="hero pointer-events-none absolute inset-0 z-0 opacity-10"
+        style={{
+          backgroundImage: `url("/img/bg-pattern.jpg")`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }} 
+          backgroundRepeat: 'no-repeat',
+        }}
       />
 
-      <div className="relative z-30 flex flex-col items-center w-full">
-        
+      <div className="relative z-30 flex w-full flex-col items-center">
         {/* Secondary Header */}
-        <div className="hero-text text-center mb-2 md:mb-2">
-          <h3 className="text-xl md:text-3xl font-english text-black leading-none uppercase tracking-tighter">
+        <div className="hero-text mb-2 text-center md:mb-2">
+          <h3 className="font-english text-xl leading-none tracking-tighter text-black uppercase md:text-3xl">
             SINCE THE BEGINNING
           </h3>
-          <h3 className="text-3xl md:text-5xl font-english text-[#E31E24] leading-none uppercase tracking-tighter mt-1">
+          <h3 className="font-english mt-1 text-3xl leading-none tracking-tighter text-[#E31E24] uppercase md:text-5xl">
             EVERY DAY
           </h3>
         </div>
 
         {/* Main Arabic Headline */}
-        <div className="hero-text text-center flex flex-col items-center gap-8 md:gap-8">
-          <h1 
-            dir="rtl" 
-            className="flex flex-col md:flex-row items-center justify-center gap-0 md:gap-4 text-[16vw] md:text-[9vw] lg:text-[110px] font-arabic font-black text-black leading-[0.9] md:leading-none"
-            style={{ 
+        <div className="hero-text flex flex-col items-center gap-8 text-center md:gap-8">
+          <h1
+            dir="rtl"
+            className="font-arabic flex flex-col items-center justify-center gap-0 text-[16vw] leading-[0.9] font-black text-black md:flex-row md:gap-4 md:text-[9vw] md:leading-none lg:text-[110px]"
+            style={{
               textShadow: `
                 -4px 4px 0px #fff, 
                 -1px -1px 0px #fff, 
@@ -59,22 +55,24 @@ export default function Hero() {
                 -1px 1px 0px #fff, 
                 1px 1px 0px #fff,
                 -6px 6px 20px rgba(0,0,0,0.12)
-              ` 
+              `,
             }}
           >
             {/* Split the text into spans for better control */}
-            <span className="whitespace-nowrap mb-7 md:mb-0">من بكري</span>
+            <span className="mb-7 whitespace-nowrap md:mb-0">من بكري</span>
             <span className="whitespace-nowrap">
               كل يوم <span className="text-[#E31E24]">بيمو</span>
             </span>
           </h1>
-          
+
           {/* CTA Button */}
-          <div className="pointer-events-auto mt-4" onClick={(e) => handleNavigation(e, "/products")}>
-            <BimoButton text={t("cta")} bgColor="#E31E24"  />
+          <div
+            className="pointer-events-auto mt-4"
+            onClick={(e) => handleNavigation(e, '/products')}
+          >
+            <BimoButton text={t('cta')} bgColor="#E31E24" />
           </div>
         </div>
-        
       </div>
     </section>
   );
