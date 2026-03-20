@@ -55,7 +55,7 @@ npm run start
 
 ## 📁 Project Structure
 
-``
+```
 bimo/
 ├── app/
 │   ├── [locale]/          # Internationalized routes
@@ -88,7 +88,7 @@ bimo/
 │   └── img/            # Optimized images
   ├── video/      # videoportal
 └── package.json
-``
+```
 
 ---
 
