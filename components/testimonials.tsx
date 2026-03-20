@@ -25,6 +25,7 @@ const TestimonialCard = ({ img, rotate }: { img: string; rotate: string }) => (
     <img
       src={img}
       alt="Bimo story"
+      loading='lazy'
       className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
     />
   </div>

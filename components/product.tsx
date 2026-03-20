@@ -191,6 +191,7 @@ export default function ProductSection() {
               src={PRODUCTS[prevIndex].img}
               alt="prev"
               fill
+              loading='lazy'
               className="object-contain blur-[1px] grayscale-40"
             />
           </div>
@@ -200,6 +201,7 @@ export default function ProductSection() {
               src={PRODUCTS[nextIndex].img}
               alt="next"
               fill
+              loading='lazy'
               className="object-contain blur-[1px] grayscale-40"
             />
           </div>
@@ -214,6 +216,7 @@ export default function ProductSection() {
               src="/img/stars.svg"
               alt="star"
               fill
+              loading='lazy'
               className="object-contain"
             />
           </div>
@@ -222,6 +225,7 @@ export default function ProductSection() {
               src="/img/stars.svg"
               alt="star"
               fill
+              loading='lazy'
               className="object-contain"
             />
           </div>
@@ -230,6 +234,7 @@ export default function ProductSection() {
               src="/img/stars.svg"
               alt="star"
               fill
+              loading='lazy'
               className="object-contain"
             />
           </div>
@@ -238,6 +243,7 @@ export default function ProductSection() {
               src="/img/stars.svg"
               alt="star"
               fill
+              loading='lazy'
               className="object-contain"
             />
           </div>
@@ -248,6 +254,7 @@ export default function ProductSection() {
               alt={currentProduct.key}
               fill
               priority
+              loading='lazy'
               className="object-contain"
             />
           </div>

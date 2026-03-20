@@ -34,6 +34,7 @@ export default function VideoPortal() {
                 alt="Bimo Logo"
                 width={140}
                 height={60}
+                loading='lazy'
                 priority
                 className="mb-6 h-auto w-24 md:w-36"
               />
