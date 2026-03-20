@@ -66,7 +66,6 @@ const BuddyCookie = forwardRef<HTMLDivElement>((props, ref) => {
             alt="Bimo Galette"
             fill
             priority
-            loading='lazy'
             className="object-contain"
           />
         </div>

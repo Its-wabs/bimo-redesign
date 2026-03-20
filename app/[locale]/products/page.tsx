@@ -82,7 +82,7 @@ export default function ProductsPage() {
 
   return (
     <main
-      ref={containerRef}
+      
       className="relative min-h-screen overflow-x-hidden bg-[#FDF6E9]"
     >
       <div
@@ -97,7 +97,7 @@ export default function ProductsPage() {
       <NavBar />
 
       {/* COLLECTION SECTION */}
-      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-20 md:px-10 md:pt-32">
+      <section ref={containerRef} className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-20 md:px-10 md:pt-32">
         <h1 className="mb-8 text-center text-4xl font-black tracking-tighter text-[#3D1E12] uppercase md:mb-12 md:text-start md:text-7xl">
           {t('title')}
         </h1>

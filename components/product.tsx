@@ -254,7 +254,6 @@ export default function ProductSection() {
               alt={currentProduct.key}
               fill
               priority
-              loading='lazy'
               className="object-contain"
             />
           </div>
