@@ -90,6 +90,8 @@ bimo/
 │   └── img/            # Optimized images
   ├── video/      # videoportal
 
+```
+
 ---
 
 ## 🌍 Languages
@@ -130,11 +132,13 @@ Switch languages using the language selector in the navigation.
 ## 🐛 Known Issues / Future Improvements
 
 ### Current Limitations
+
 - [ ] No e-commerce integration (landing page only)
 - [ ] Limited to 2 languages (could add French)
 - [ ] Static content (no CMS)
 
 ### Roadmap
+
 - [ ] Add third language (French for majority french speaking algerian market)
 - [ ] Integrate CMS for content management (Sanity/Contentful)
 - [ ] Update product page with filtering/search
@@ -146,6 +150,7 @@ Switch languages using the language selector in the navigation.
 ## 🧪 Testing
 
 ### Manual Testing Checklist
+
 - [x] Mobile responsive (iPhone SE, Android)
 - [x] Tablet responsive (iPad)
 - [x] Desktop (1920×1080, 4K)
@@ -158,27 +163,30 @@ Switch languages using the language selector in the navigation.
 
 ---
 
-
 ## 📚 Lessons Learned
 
 ### Technical Challenges & Solutions
 
 **Challenge 1: 3G Performance**
+
 - **Problem**: Initial load time was 5s+ on 3G
 - **Solution**: Aggressive image optimization (WebP, 80% quality), code splitting, lazy loading
 - **Result**: <2s load time on 3G
 
 **Challenge 2: Arabic RTL Layout**
+
 - **Problem**: Animations and layouts broke in RTL mode
 - **Solution**: CSS logical properties, RTL-aware GSAP animations, separate RTL stylesheet
 - **Result**: Seamless RTL experience
 
 **Challenge 3: Scroll Animation Performance on Mobile**
+
 - **Problem**: Janky 30fps animations on budget Android devices
 - **Solution**: GPU-accelerated transforms only, disabled complex animations on low-end devices
 - **Result**: Smooth 60fps on most devices
 
 ### What I'd Do Differently
+
 - Start with i18n from day 1 (retrofitting is harder)
 - Document as I build (not retroactively)
 - Commit more frequently (smaller, focused commits)
