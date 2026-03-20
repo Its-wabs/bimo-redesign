@@ -1,6 +1,6 @@
 # Bimo - Bilingual Landing Page
 
-Modern, performance-optimized landing page for BeMo, an Algerian cookie brand with 26 years of heritage. Built with Next.js 14, featuring smooth scroll animations and native bilingual support (English/Arabic RTL).
+Modern, performance-optimized landing page for BeMo, an Algerian cookie brand with 26 years of heritage. Built with Next.js , featuring smooth scroll animations and native bilingual support (English/Arabic RTL).
 
 🔗 **Live Demo:** [bimo-redesign.vercel.app](https://bimo-redesign.vercel.app/)
 
