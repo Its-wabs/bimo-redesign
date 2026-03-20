@@ -4,7 +4,7 @@ Modern, performance-optimized landing page for BeMo, an Algerian cookie brand wi
 
 🔗 **Live Demo:** [bimo-redesign.vercel.app](https://bimo-redesign.vercel.app/)
 
-![BeMo Landing Page](./public/screenshots/hero-preview.png)
+![BimoLanding Page](./public/screenshots/hero-preview.png)
 
 ---
 
