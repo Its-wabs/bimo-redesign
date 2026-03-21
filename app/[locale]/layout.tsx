@@ -34,7 +34,12 @@ const kanit = Kanit({
 
 export const metadata: Metadata = {
   title: 'Group Bimo',
-  description: 'Group Bimo official website',
+  description: "Redesigning the heritage of Algerian cookies Bimo with modern motion.",
+  icons: {
+    icon: "/bimo-icon.png",
+    shortcut: "/bimoshort.png", 
+    apple: "/bimo-short.png", 
+  },
 };
 
 export default async function RootLayout({

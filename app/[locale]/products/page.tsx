@@ -35,6 +35,8 @@ const PRODUCTS = [
 ] as const;
 
 export default function ProductsPage() {
+
+  const navRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('collectionPage');
   const tf = useTranslations('footer');
 
@@ -52,7 +54,7 @@ export default function ProductsPage() {
 
   useGSAP(
     () => {
-      gsap.to('nav', {
+      gsap.to(navRef.current, {
         y: -100,
         autoAlpha: 0,
         duration: 0.4,
@@ -65,7 +67,7 @@ export default function ProductsPage() {
         },
       });
     },
-    { scope: containerRef }
+    
   );
 
   useGSAP(
@@ -83,7 +85,7 @@ export default function ProductsPage() {
   return (
     <main
       
-      className="relative min-h-screen overflow-x-hidden bg-[#FDF6E9]"
+      className="relative min-h-dvh overflow-x-hidden bg-[#FDF6E9]"
     >
       <div
         className="pointer-events-none fixed inset-0 z-0 opacity-10"
@@ -94,7 +96,7 @@ export default function ProductsPage() {
         }}
       />
 
-      <NavBar />
+      <NavBar ref={navRef} />
 
       {/* COLLECTION SECTION */}
       <section ref={containerRef} className="relative z-10 mx-auto max-w-7xl px-6 pt-24 pb-20 md:px-10 md:pt-32">
@@ -136,9 +138,9 @@ export default function ProductsPage() {
 
       {/* FOOTER */}
       <footer className="footer relative z-10 flex min-h-[80vh] w-full flex-col items-center justify-center bg-[#151414] px-6 pt-7 pb-2 text-white md:pt-22 md:pb-8">
-        <div className="h-[10vh] w-full md:h-10" />
+        <div className="h-[7vh] w-full md:h-10" />
 
-        <p className="text-md font-english mt-5 mb-6 text-center tracking-[0.2em] uppercase md:mt-0 md:max-w-5xl md:text-3xl">
+        <p className="text-md font-english  mb-6 text-center tracking-[0.2em] uppercase md:mt-0 md:max-w-5xl md:text-3xl">
           {tf('signup')}
         </p>
 

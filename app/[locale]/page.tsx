@@ -62,7 +62,7 @@ export default function Page() {
       });
 
       gsap.to(cookieRef.current, {
-        y: '43vh',
+        y: window.innerHeight * 0.43,
         rotation: 0,
         duration: 1.8,
         ease: 'power4.out',
@@ -439,7 +439,7 @@ export default function Page() {
   );
 
   return (
-    <main ref={containerRef} className="relative overflow-x-hidden">
+    <main ref={containerRef} className="relative min-h-dvh  overflow-x-hidden">
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <NavBar ref={navRef} />
 
