@@ -21,15 +21,21 @@ export const useLiquidNavigation = () => {
       `;
       overlay.setAttribute('dir', 'ltr');
 
-      overlay.innerHTML = `
-        <div style="height: 130%; width: 15vw; margin-left: -14.8vw; position: relative; flex-shrink: 0; z-index: 2;">
-          <svg style="width:100%; height:100%" viewBox="0 0 320 1440" preserveAspectRatio="none">
+     overlay.innerHTML = `
+        <div style="height: 100vh; width: 15vw; margin-left: -14.9vw; position: relative; flex-shrink: 0; z-index: 2;">
+          <svg style="width:101%; height:100%; display: block;" viewBox="0 0 320 1440" preserveAspectRatio="none">
             <path fill="#3D1E12" d="M320,0 L160,0 C0,120 320,240 160,360 C0,480 320,600 160,720 C0,840 320,960 160,1080 C0,1200 320,1320 160,1440 L320,1440 Z" />
           </svg>
         </div>
-        <div style="flex: 1; background: #3D1E12; position: relative; z-index: 1;"></div>
-        <div style="height: 130%; width: 15vw; margin-right: -14.8vw; position: relative; flex-shrink: 0; transform: scaleX(-1); z-index: 2;">
-          <svg style="width:100%; height:100%" viewBox="0 0 320 1440" preserveAspectRatio="none">
+
+        <div style="width: 2px; background: #3D1E12; height: 100vh; margin-left: -1px; margin-right: -1px; z-index: 1;"></div>
+
+        <div style="flex: 1; background: #3D1E12; position: relative; z-index: 1; height: 100vh;"></div>
+
+        <div style="width: 2px; background: #3D1E12; height: 100vh; margin-left: -1px; margin-right: -1px; z-index: 1;"></div>
+
+        <div style="height: 100vh; width: 15vw; margin-right: -14.9vw; position: relative; flex-shrink: 0; transform: scaleX(-1); z-index: 2;">
+          <svg style="width:101%; height:100%; display: block;" viewBox="0 0 320 1440" preserveAspectRatio="none">
             <path fill="#3D1E12" d="M320,0 L160,0 C0,120 320,240 160,360 C0,480 320,600 160,720 C0,840 320,960 160,1080 C0,1200 320,1320 160,1440 L320,1440 Z" />
           </svg>
         </div>

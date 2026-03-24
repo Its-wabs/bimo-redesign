@@ -83,7 +83,7 @@ export default function ProductsPage() {
   );
 
   return (
-    <main
+    <div
       
       className="relative min-h-dvh overflow-x-hidden bg-[#FDF6E9]"
     >
@@ -223,6 +223,6 @@ export default function ProductsPage() {
           </a>
         </div>
       </footer>
-    </main>
+    </div>
   );
 }

@@ -439,7 +439,7 @@ export default function Page() {
   );
 
   return (
-    <main ref={containerRef} className="relative min-h-dvh  overflow-x-hidden">
+    <div ref={containerRef} className="relative min-h-dvh  overflow-x-hidden">
       <Preloader onComplete={() => setPreloaderDone(true)} />
       <NavBar ref={navRef} />
 
@@ -470,6 +470,6 @@ export default function Page() {
 
         <BuddyCookie ref={buddyRef} />
       </div>
-    </main>
+    </div>
   );
 }
